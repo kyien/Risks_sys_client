@@ -6,9 +6,10 @@ export default class Trades extends Component {
 
     state = {
         account_type: '',
-        lot_size:'',
-        p_allocation:'',
-        mode:'',
+        asset:'',
+        trader:'',
+        risk:'',
+        amount:'',
         show:false
       }
 
@@ -23,6 +24,51 @@ export default class Trades extends Component {
     }
      
   render() {
+
+    const PAMM=()=>{
+
+      // if(this.state.payment_option =='PAMM' ){
+
+          
+            return(
+              <div>
+               <Form.Group>
+              <Form.Control as="select" custom="true" name="asset" value={this.state.asset}  onChange={this.valuechange}>
+              <option value="">Select Asset</option>
+              <option value="gold">Gold</option>
+              <option value="oil"> Oil</option>
+              <option value="forex">Forex</option>
+              
+            </Form.Control></Form.Group>
+               <Form.Group>
+              <Form.Control as="select" custom="true" name="trader" value={this.state.trader}  onChange={this.valuechange}>
+              <option value="">Select Trader</option>
+              <option value="T-A">Trader 1   65% success rate</option>
+              <option value="T-B">Trader 2  75% success rate</option>
+              <option value="T-C">Trader 3   70% success rate</option>
+              
+            </Form.Control></Form.Group>
+              <Form.Group>
+              <label htmlFor="exampleInputUsername1"> % Risk</label>
+              <Form.Control
+               type="text"
+                id="exampleInputUsername1"
+                 placeholder="Enter the % risk for this account"
+                  size="lg"
+                  name="phone"
+                   value={this.state.risk} 
+                    onChange={this.valuechange}
+          
+                    />
+            </Form.Group>
+            </div>
+            )
+
+            // }
+                
+      
+    }
+
     return (
       <div>
 
@@ -59,7 +105,7 @@ export default class Trades extends Component {
                         <form className="forms-sample" onSubmit={this.onSubmit}>
                           <Form.Group>
                             <label htmlFor="exampleInputUsername1"> Account type</label>
-                            <Form.Control as="select" custom name="account_type" value={this.state.account_type}  onChange={this.valuechange}>
+                            <Form.Control as="select" custom="true" name="account_type" value={this.state.account_type}  onChange={this.valuechange}>
                                 <option value="">Select trading account type</option>
                                 <option value="pamm">PAMM</option>
                                 <option value="mamm"> MAMM</option>
@@ -67,39 +113,24 @@ export default class Trades extends Component {
                                 
                               </Form.Control>
                           </Form.Group>
-                          <Form.Group>
-                            <label htmlFor="exampleInputEmail1">Lot size</label>
-                            <Form.Control type="text" className="form-control" name="lot_size" value={this.state.lot_size}
-                            id="exampleInputEmail1" placeholder="enter the lot size" onChange={this.valuechange}/>
-                          </Form.Group>
-                          <Form.Group>
-                            <label htmlFor="exampleInputEmail1">Percent Allocation</label>
-                            <Form.Control type="text" className="form-control" name="p_allocation" value={this.state.p_allocation}
-                            id="exampleInputEmail1" placeholder="enter the percent allocation" onChange={this.valuechange}/>
-                          </Form.Group>
-                          <Form.Control as="select" custom  name="mode" value={this.state.mode}  onChange={this.valuechange}>
-                                <option value="">Select mode</option>
-                                <option value="multiplier">Multiplier</option>
-                                <option value="fixed"> Fixed</option>
-                                <option value="Risk">Risk</option>
-                                <option value="equity">Equity</option>
-                                
-                              </Form.Control>
-                          {/* <Form.Group>
-                            <label htmlFor="exampleInputPassword1">Password</label>
-                            <Form.Control type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-                          </Form.Group>
-                          <Form.Group>
-                            <label htmlFor="exampleInputConfirmPassword1">Confirm Password</label>
-                            <Form.Control type="password" className="form-control" id="exampleInputConfirmPassword1" placeholder="Password" />
-                          </Form.Group> */}
-                          {/* <div className="form-check">
-                            <label className="form-check-label text-muted">
-                              <input type="checkbox" className="form-check-input"/>
-                              <i className="input-helper"></i>
-                              Remember me
-                            </label>
-                          </div> */}
+
+                              {this.state.account_type == 'pamm' ? <PAMM /> :null}
+                         
+
+                              <Form.Group>
+                                  <label htmlFor="exampleInputUsername1">Amount to allocate</label>
+                                  <Form.Control
+                                  type="text"
+                                    id="exampleInputUsername1"
+                                    placeholder="Enter amount to trade with "
+                                      size="lg"
+                                      name="amount"
+                                      value={this.state.amount} 
+                                        onChange={this.valuechange}
+                              
+                                        />
+                                </Form.Group>
+                        
                             
                           <br/>
                           <button type="submit" className="btn btn-primary mr-2" >Submit</button>

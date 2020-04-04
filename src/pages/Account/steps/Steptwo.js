@@ -18,7 +18,7 @@ export default class Steptwo extends Component {
                         <h4 className="card-title">Account Verification</h4>
                         <form className="forms-sample" >
                         <Form.Group>
-                            <label htmlFor="exampleInputUsername1">country</label>
+                            <label htmlFor="exampleInputUsername1"><strong>country</strong></label>
                             <Form.Control as="select" custom  name="country" value={values.country}  onChange={handlechange}>
                             <option  value="">Select country</option>
 
@@ -33,7 +33,7 @@ export default class Steptwo extends Component {
                               </Form.Control>
                         </Form.Group>
                         <Form.Group>
-                            <label htmlFor="exampleInputUsername1">street</label>
+                            <label htmlFor="exampleInputUsername1"><strong>street</strong></label>
                             <Form.Control
                             type="text"
                             id="exampleInputUsername1"
@@ -44,7 +44,7 @@ export default class Steptwo extends Component {
                                 onChange={handlechange}/>
                         </Form.Group>
                         <Form.Group>
-                            <label htmlFor="exampleInputUsername1">address</label>
+                            <label htmlFor="exampleInputUsername1"><strong>address</strong></label>
                             <Form.Control
                             type="text"
                             id="exampleInputUsername1"
@@ -55,7 +55,7 @@ export default class Steptwo extends Component {
                                 onChange={handlechange}/>
                         </Form.Group>
                         <Form.Group>
-                            <label htmlFor="exampleInputUsername1">Postal Code</label>
+                            <label htmlFor="exampleInputUsername1"><strong>Postal Code</strong></label>
                             <Form.Control
                             type="text"
                             id="exampleInputUsername1"

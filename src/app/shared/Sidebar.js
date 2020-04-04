@@ -152,7 +152,7 @@ class Sidebar extends Component {
             </Collapse>
           </li>
           <li className={ this.isPathActive('/signout') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" onClick={this.logout}>
+            <Link className="nav-link" to="#" onClick={this.logout}>
               <i className="mdi mdi-logout menu-icon"></i>
               <span className="menu-title">Sign Out</span>
             </Link>

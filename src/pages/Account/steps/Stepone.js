@@ -15,11 +15,11 @@ export default class Stepone extends Component {
                         <h4 className="card-title">Account Verification</h4>
                         <form className="forms-sample" >
                         <Form.Group>
-                            <label htmlFor="exampleInputUsername1">Phone</label>
+                            <label htmlFor="exampleInputUsername1"><strong>Phone</strong></label>
                             <Form.Control
                             type="text"
                             id="exampleInputUsername1"
-                            placeholder="Enter Amount"
+                            placeholder="Enter phone"
                                 size="lg"
                                 name="phone"
                                 value={values.phone} 

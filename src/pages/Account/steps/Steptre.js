@@ -45,36 +45,20 @@ export default class Steptre extends Component {
                         <h4 className="card-title">Account Verification</h4>
                         <form className="forms-sample" >
                         <Form.Group>
-                            <label htmlFor="exampleInputUsername1">Tax Certificate</label>
-                            {/* <Form.File 
-                                    id="custom-file-translate-scss"
-                                    label="upload tax document"
-                                    lang="en"
-                                    custom
-                                    name="pin_certificate"
-                                value={values.pin_certificate} 
-                                onChange={handlechange}/>
-                                /> */}
-                                <div class="custom-file">
+                            <label htmlFor="exampleInputUsername1"><strong>Proof of Identity (ID/PASSPORT/DRIVING LICENSE)</strong></label>
+                          
+                                <div className="custom-file">
                                 <input id="inputGroupFile01" type="file" value={values.pin_certificate} className="custom-file-input" name="pin_certificate" onChange={handlechange}/>
-                                <label class="custom-file-label" htmlFor="inputGroupFile01">upload tax document</label>
+                                <label className="custom-file-label" htmlFor="inputGroupFile01">upload document</label>
                                 </div>
                             
                         </Form.Group>
                         <Form.Group>
-                            <label htmlFor="exampleInputUsername1">National ID</label>
-                            {/* <Form.File 
-                                    id="custom-file-translate-scss"
-                                    label="upload national id"
-                                    lang="en"
-                                    custom
-                                    name="nationalId"
-                                value={values.nationalId} 
-                                onChange={handlechange}/>
-                                /> */}
-                                <div class="custom-file">
+                            <label htmlFor="exampleInputUsername1"><strong>Tax Document</strong></label>
+                          
+                                <div className="custom-file">
                                 <input id="inputGroupFile01" type="file" value={values.nationalId} className="custom-file-input" name="nationalId" onChange={handlechange}/>
-                                <label class="custom-file-label" htmlFor="inputGroupFile01">upload national id</label>
+                                <label className="custom-file-label" htmlFor="inputGroupFile01">upload tax certificate</label>
                                 </div>
                         </Form.Group>
                         

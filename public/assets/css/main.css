@@ -125,6 +125,7 @@ button {
 }
 
 body {
+  padding-right: 0;
   font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
   font-weight: 400;
   font-size: 14px;

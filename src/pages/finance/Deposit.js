@@ -6,6 +6,9 @@ export default class Deposit extends Component {
 
     state = {
         amount: '',
+        payment_option:'',
+        acc_no:'',
+        email:'',
         phone:'',
         show:false
       };
@@ -22,7 +25,69 @@ export default class Deposit extends Component {
           this.setState({show:true})
 
       }
+
+      
     render() {
+
+    const PaymentSwitch=()=>{
+
+        switch(this.state.payment_option){
+
+            case 'M-PESA':
+              return(
+
+                <Form.Group>
+                <label htmlFor="exampleInputUsername1">Phone No</label>
+                <Form.Control
+                 type="text"
+                  id="exampleInputUsername1"
+                   placeholder="Enter valid mpesa phone."
+                    size="lg"
+                    name="phone"
+                     value={this.state.phone} 
+                      onChange={this.changeHandler}
+            
+                      />
+              </Form.Group>
+
+              )
+
+              case 'paypal':
+                return(
+                  <Form.Group>
+                  <label htmlFor="exampleInputUsername1">Paypal Email</label>
+                  <Form.Control
+                   type="text"
+                    id="exampleInputUsername1"
+                     placeholder="Enter your paypal email"
+                      size="lg"
+                      name="email"
+                       value={this.state.email} 
+                        onChange={this.changeHandler}
+              
+                        />
+                </Form.Group>
+                )
+
+                default:
+                  return(
+
+              <Form.Group>
+              <label htmlFor="exampleInputUsername1">Account No</label>
+              <Form.Control
+               type="text"
+                id="exampleInputUsername1"
+                 placeholder="Enter Bank Account no."
+                  size="lg"
+                  name="acc_no"
+                   value={this.state.acc_no} 
+                    onChange={this.changeHandler}
+          
+                    />
+            </Form.Group>
+                  )
+        }
+      }
         return (
             <div>
                   <div className="page-header">
@@ -64,13 +129,23 @@ export default class Deposit extends Component {
                         size="lg"
                         name="amount"
                          value={this.state.amount} 
-                          onChange={this.changeHandler}/>
+                          onChange={this.changeHandler}
+                
+                          />
                   </Form.Group>
                   <Form.Group>
-                    <label htmlFor="exampleInputEmail1">Phone</label>
-                    <Form.Control type="text" className="form-control" name="phone" value={this.state.phone}
-                     id="exampleInputEmail1" placeholder="Phone Number" onChange={this.changeHandler}/>
+                  <label htmlFor="exampleInputUsername1">Payment Option</label>
+                            <Form.Control as="select" custom="true"  name="payment_option" value={this.state.payment_option}  onChange={this.changeHandler}>
+                            <option  value="">Select Payment option </option>
+                            <option  value="paypal">Paypal </option>
+                            <option value="M-PESA">M-PESA</option>
+                            <option value="pesa_link">Pesa Link</option>
+                            <option value="card">MASTER/VISA</option>
+      
+                              </Form.Control>
                   </Form.Group>
+
+                  {this.state.payment_option ? <PaymentSwitch/> : null}
                 
                   <button type="submit" className="btn btn-primary mr-2" >Submit</button>
                 </form>
