@@ -4,8 +4,10 @@ import {withRouter} from 'react-router-dom'
 import Routes from './routes'
 import '../app/App.scss';
 import Navbar from '../app/shared/Navbar';
-import Sidebar from '../app/shared/Sidebar';
+import ClientSidebar from '../app/shared/client/Sidebar';
+import TraderSidebar from '../app/shared/trader/Sidebar';
 import Footer from '../app/shared/Footer';
+import { connect } from "react-redux"
 
  class Auth extends Component {
 
@@ -16,7 +18,7 @@ import Footer from '../app/shared/Footer';
     }
   render() {
     let navbarComponent = !this.state.isFullPageLayout ? <Navbar/> : '';
-    let sidebarComponent = !this.state.isFullPageLayout ? <Sidebar/> : '';
+    let sidebarComponent = !this.state.isFullPageLayout ? this.props.usertype ==='trader'?<TraderSidebar/>:<ClientSidebar/> : '';
     let footerComponent = !this.state.isFullPageLayout ? <Footer/> : '';
     return (
       <div className="container-scroller">
@@ -61,5 +63,10 @@ import Footer from '../app/shared/Footer';
     }
   }
 }
+const mapStateToProps=(state)=>{
+  return{
+    usertype:state.Auth.usertype, 
+  }
+}
 
-export default withRouter(Auth)
+export default withRouter(connect(mapStateToProps)(Auth))

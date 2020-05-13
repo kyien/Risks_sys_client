@@ -1,6 +1,6 @@
 import React ,{Component}from 'react'
 import Modal from 'react-responsive-modal';
-import {registerUser} from './redux/Action'
+import {registerClientUser,registerTraderUser} from './redux/Action'
 import { connect } from "react-redux"
 
 
@@ -15,23 +15,36 @@ class  SignupModal  extends Component{
         }
     }
 
-    submitHandler =async(event) => {
+    submitClientHandler =async(event) => {
         event.preventDefault()
         // this.setState({loading:true})
-        await this.props.registerUser(this.state.username,this.state.email,this.state.password)
+        await this.props.registerClientUser(this.state.username,this.state.email,this.state.password)
        
         
       }
+
+      submitTraderHandler =async(event) => {
+        //   console.log('start......')
+        //   console.log(this.state.email)
+        event.preventDefault()
+        // this.setState({loading:true})
+        await this.props.registerTraderUser(this.state.username,this.state.email,this.state.password)
+       
+        
+      }
+
 
       changeHandler = event => {
         this.setState({ [event.target.name]: event.target.value });
       }
   
 render(){
+     
+    
     return(
         <Modal open={this.props.open} onClose={this.props.close} center>
     
-    <form className="signup"  onSubmit={this.submitHandler}  noValidate>
+    <form className="signup"  onSubmit={this.props.type === 'trader' ?this.submitTraderHandler : this.submitClientHandler}  noValidate>
                 <h3>Sign Up</h3>
 
                 <div className="form-group">
@@ -45,7 +58,20 @@ render(){
                     placeholder="First name" />
                 </div>
 
-                <div className="form-group">
+              {this.props.type == 'trader'? 
+              <div className="form-group">
+                    <label> Your Myfx Email address</label>
+                    <input 
+                    name="email"
+                    type="email"
+                     className="form-control"
+                      placeholder="Enter email"
+                      value={this.state.email}
+                onChange={this.changeHandler}
+                       />
+                </div>
+                 :
+                 <div className="form-group">
                     <label>Email address</label>
                     <input 
                     name="email"
@@ -56,7 +82,22 @@ render(){
                 onChange={this.changeHandler}
                        />
                 </div>
+              }
 
+              {this.props.type == 'trader'
+              ? 
+                <div className="form-group">
+                    <label>Your Myfx Password</label>
+                    <input 
+                    name="password"
+                    type="password" 
+                    className="form-control" 
+                    value={this.state.password}
+                onChange={this.changeHandler}
+                    placeholder="Enter password"
+                     />
+                </div>
+                :
                 <div className="form-group">
                     <label>Password</label>
                     <input 
@@ -68,6 +109,7 @@ render(){
                     placeholder="Enter password"
                      />
                 </div>
+              }
 
                 <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                 <p className="forgot-password text-right">
@@ -87,7 +129,8 @@ const mapStateToProps=(state)=>{
 }
 const mapDispatchToProps={
   
-      registerUser
+      registerClientUser,
+      registerTraderUser
     
   
 }

@@ -1,6 +1,6 @@
 import React,{Component}from 'react'
 import Modal from 'react-responsive-modal';
-import {loginUser} from './redux/Action'
+import {loginClientUser,loginTraderUser} from './redux/Action'
 import { connect } from "react-redux"
 
 
@@ -12,10 +12,17 @@ constructor(props){
         password:''
     }
 }
-    submitHandler =async(event) => {
+    submitClientHandler =async(event) => {
         event.preventDefault()
         // this.setState({loading:true})
-        await this.props.loginUser(this.state.email,this.state.password)
+        await this.props.loginClientUser(this.state.email,this.state.password)
+       
+        
+      }
+    submitTraderHandler =async(event) => {
+        event.preventDefault()
+        // this.setState({loading:true})
+        await this.props.loginTraderUser(this.state.email,this.state.password)
        
         
       }
@@ -29,7 +36,7 @@ constructor(props){
         <Modal open={this.props.open} onClose={this.props.close}  center>
     
       <form className="signin" 
-      onSubmit={this.submitHandler}
+      onSubmit={this.props.type === 'trader' ?this.submitTraderHandler : this.submitClientHandler}
                   noValidate>
                 <h3>Sign In</h3>
 
@@ -84,7 +91,8 @@ const mapStateToProps=(state)=>{
 }
 const mapDispatchToProps={
   
-      loginUser
+      loginTraderUser,
+      loginClientUser
     
   
 }

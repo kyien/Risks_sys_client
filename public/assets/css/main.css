@@ -117,6 +117,9 @@ button {
   border: none;
 }
 
+.top-link-drop {
+  color:rgb(51, 47, 47);
+}
 /* ==========================================================================
    #PAGE WRAPPER
    ========================================================================== */
@@ -610,7 +613,24 @@ input {
   font-weight: 400;
   margin-bottom: 40px;
 }
-
+.diff-link {
+  color: rgb(223, 209, 209);
+}
+.custom-div1 {
+position: absolute;
+left:10px;
+top:-5px;
+}
+.custom-div2 {
+position: absolute;
+right:750px;
+top:3px;
+}
+.dyv {
+  position: absolute;
+  right:20px;
+  top:7px;
+}
 /* ==========================================================================
    #CARD
    ========================================================================== */

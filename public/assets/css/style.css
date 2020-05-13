@@ -47,6 +47,9 @@ h1, h2, h3, h4, h5, h6, .font-primary {
   transition: display 0.5s ease-in-out;
   z-index: 99999;
 }
+.top-link-drop {
+  color:rgb(51, 47, 47);
+}
 
 .back-to-top i {
   font-size: 24px;
@@ -73,8 +76,8 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 
 #topbar .contact-info a {
   line-height: 1;
-  /* color: #444; */
-  color: rgb(223, 209, 209);
+  color: #444;
+  /* color: rgb(223, 209, 209); */
   transition: 0.3s;
 }
 

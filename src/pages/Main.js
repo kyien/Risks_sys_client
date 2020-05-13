@@ -10,10 +10,11 @@ import SignupModal from './SignupModal'
   state = {
     opensignin: false,
     opensignup: false,
+    type:''
   }
  
-  onOpenModal (name) {
-    this.setState({[name] : true })
+  onOpenModal (name,type) {
+    this.setState({[name] : true, type:type })
   }
  
   onCloseModal(name) {
@@ -24,23 +25,65 @@ import SignupModal from './SignupModal'
   return (
     <div className="App">
 
-<LoginModal open={this.state.opensignin} close={()=>this.onCloseModal('opensignin')} link={()=>this.onOpenModal('opensignup')}/>
+<LoginModal 
+type={this.state.type}  
+open={this.state.opensignin} 
+close={()=>this.onCloseModal('opensignin')} 
+link={this.state.type ==='trader'?()=>this.onOpenModal('opensignup','trader') :()=>this.onOpenModal('opensignup','client')}/>
+
 <SignupModal 
+type={this.state.type}
 open={this.state.opensignup} 
 close={()=>this.onCloseModal('opensignup')}
-link={()=>this.onOpenModal('opensignin')}
+link={this.state.type ==='trader'?()=>this.onOpenModal('opensignin','trader'):()=>this.onOpenModal('opensignin','client')}
 />
      
   <section id="topbar" className="d-none d-lg-block">
+
     <div className="container clearfix">
       <div className="contact-info float-left">
-        <i className="icofont-envelope"></i><a href="mailto:contact@example.com">contact@sortika.com</a>
+        <i className="icofont-envelope"></i><span className="diff-link" >contact@knightingale.ke</span>
         <i className="icofont-phone"></i>
-        <span>+254 7000 0000</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button" className="btn btn-primary btn-sm" onClick={()=>this.onOpenModal('opensignup')}>JOIN</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button type="button" className="btn btn-primary btn-sm" onClick={()=>this.onOpenModal('opensignin')}>SIGN UP</button>
-      </div>
-      <div className="social-links float-right">
+        <span>+254 7000 0000</span>
+         {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+         
+       
+         </div>
+         {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+         
+
+         {/* <div className="dropdown custom-div2">  */}
+        <button type="button" className="btn btn-primary btn-lg dropdown-toggle custom-div2"
+                id="dropdownMenuBtn"
+                data-toggle="dropdown"
+                  aria-haspopup="true" 
+                  aria-expanded="false"
+                >SIGN IN</button>
+                  <div className="dropdown-menu" aria-labelledby="dropdownMenuBtn">
+              <a className="dropdown-item" href="#" onClick={()=>this.onOpenModal('opensignin','trader')}>Trader</a>
+              <a className="dropdown-item" href="#" onClick={()=>this.onOpenModal('opensignin','client')}>Client</a>
+             
+                   {/* </div>  */}
+                   </div>
+
+         <div className="dropdown custom-div1"> 
+         <button type="button" className="btn btn-primary btn-lg dropdown-toggle "
+         id="dropdownMenuBtn"
+                data-toggle="dropdown"
+                aria-haspopup="true" 
+                aria-expanded="false"
+        >JOIN</button>
+             
+                  <div className="dropdown-menu" aria-labelledby="dropdownMenuBtn">
+              <a className="dropdown-item top-link-drop" href="#"  onClick={()=>this.onOpenModal('opensignup','trader')}>Trader</a>
+              <a className="dropdown-item top-link-drop" href="#"  onClick={()=>this.onOpenModal('opensignup','client')}>Client</a>
+                   </div> 
+           </div> 
+       
+        
+          
+       
+      <div className="social-links float-right dyv">
       
         <a href="#" className="twitter"><i className="icofont-twitter"></i></a>
         <a href="#" className="facebook"><i className="icofont-facebook"></i></a>
@@ -70,8 +113,8 @@ link={()=>this.onOpenModal('opensignin')}
           <li><a href="#team">Team</a></li>
           <li className="drop-down"><a href="">Sign In</a>
             <ul>
-              <li><a href="#" onClick={()=>this.onOpenModal('opensignin')}>Trader</a></li>
-              <li><a href="#" onClick={()=>this.onOpenModal('opensignin')}>Client</a></li>
+              <li><a href="#" onClick={()=>this.onOpenModal('opensignin','trader')}>Trader</a></li>
+              <li><a href="#" onClick={()=>this.onOpenModal('opensignin','client')}>Client</a></li>
              
             </ul>
           </li>

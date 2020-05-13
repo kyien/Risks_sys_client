@@ -73,8 +73,8 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 
 #topbar .contact-info a {
   line-height: 1;
-  /* color: #444; */
-  color: rgb(223, 209, 209);
+  color: #444;
+  /* color: rgb(223, 209, 209); */
   transition: 0.3s;
 }
 
