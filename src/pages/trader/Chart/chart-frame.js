@@ -8,7 +8,7 @@ export default class ChartFrame extends Component {
             <div>
 
 <Iframe url="https://demo.chartiq.com/"
-        width="1200px"
+        width="1100px"
         height="700px"
         allowFullScreen
         loading="lazy"

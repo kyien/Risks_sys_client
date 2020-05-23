@@ -176,6 +176,13 @@ import * as calc from './functionz'
         dispatch(loginStart())
         console.log('trader ..............')
         await axios.post('https://api.sortika.com/trader/login',
+
+        // {
+        //   headers:{
+        //     'Access-Control-Allow-Origin': '*',
+        //     'Content-Type': 'application/json',
+        //   }
+        // },
         {
           email:email,
           password:pass
@@ -225,7 +232,9 @@ import * as calc from './functionz'
     console.log('logging out>>>')
     dispatch(logoutStart())
     // try {
-    await  axios.post('https://api.sortika.com/trader/logout?token='+token)
+    await  axios.post('https://api.sortika.com/trader/logout?token='+token,
+    
+    )
     .then(() => {
         dispatch(logoutFinished())
     }).catch((error)=>{
@@ -238,7 +247,14 @@ import * as calc from './functionz'
     export const getForex=()=>async(dispatch)=>{
       dispatch(forexstart())
 
-        await axios.get('https://www.freeforexapi.com/api/live?pairs=EURGBP,USDJPY,USDCAD,USDEUR,NZDUSD,USDCHF,AUDUSD').then((res)=>{
+        await axios.get('https://www.freeforexapi.com/api/live?pairs=EURGBP,USDJPY,USDCAD,USDEUR,NZDUSD,USDCHF,AUDUSD',
+        {
+        headers:{
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        }
+      }
+        ).then((res)=>{
           console.log(res.data.rates)
           dispatch(forexfinished(res.data.rates))
         }).catch((error)=>{
