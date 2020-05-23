@@ -42,6 +42,7 @@ render(){
      
     
     return(
+        
         <Modal open={this.props.open} onClose={this.props.close} center>
     
     <form className="signup"  onSubmit={this.props.type === 'trader' ?this.submitTraderHandler : this.submitClientHandler}  noValidate>
@@ -118,13 +119,17 @@ render(){
             </form>
             
 </Modal>
+
+             
+
     )
 }
 }
 
 const mapStateToProps=(state)=>{
     return{
-      fetching:state.Auth.isFetching
+      fetching:state.Auth.isFetching,
+      staterr:state.stateReducer.hasError
     }
 }
 const mapDispatchToProps={

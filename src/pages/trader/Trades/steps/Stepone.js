@@ -1,12 +1,103 @@
 import React, { Component } from 'react'
 import {Form}from 'react-bootstrap'
+import Forex from '../Data/forex.json'
+import Crypto from '../Data/crypto.json'
+import Indices from '../Data/indices.json'
+import Commodities from '../Data/commodities.json'
 
 export default class Stepone extends Component {
 
+  state={
+    forex:Forex,
+    crypto:Crypto,
+    indices:Indices,
+    commodities:Commodities
+  }
 
   render() {
-    
+   
     const {values,handlechange,nextstep}=this.props
+
+
+
+    const AssetSwitch=()=>{
+
+
+
+      switch(values.asset_type){
+
+          case 'forex':
+            return(
+
+              <Form.Group>
+              <label htmlFor="exampleInputUsername1">Forex:</label>
+              <Form.Control as="select"  name="asset" value={values.asset}  onChange={handlechange}>
+                            <option  value="">Select forex</option>
+
+                            {this.state.forex.map((ix,index)=>{
+
+                          return <option key={index} value={ix.name}>{ix.name}</option> 
+                              
+                                 
+                            })}
+                            </Form.Control>
+            </Form.Group>
+
+            )
+
+            case 'indices':
+              return(
+                <Form.Group>
+                <label htmlFor="exampleInputUsername1">Indices :</label>
+                <Form.Control as="select"   name="asset" value={values.asset}  onChange={handlechange}>
+                            <option  value="">Select index</option>
+
+                            {this.state.indices.map((ix,index)=>{
+
+                          return <option key={index} value={ix.name}>{ix.name}</option> 
+                              
+                                 
+                            })}
+                            </Form.Control>
+              </Form.Group>
+              )
+            case 'cypto_currency':
+              return(
+                <Form.Group>
+                <label htmlFor="exampleInputUsername1">Crypto :</label>
+                <Form.Control as="select"   name="asset" value={values.asset}  onChange={handlechange}>
+                            <option  value="">Select Crypto</option>
+
+                            {this.state.crypto.map((ix,index)=>{
+
+                          return <option key={index} value={ix.name}>{ix.name}</option> 
+                              
+                                 
+                            })}
+                            </Form.Control>
+              </Form.Group>
+              )
+
+              default:
+                return(
+
+            <Form.Group>
+            <label htmlFor="exampleInputUsername1">Commodities :</label>
+            <Form.Control as="select"   name="asset" value={values.asset}  onChange={handlechange}>
+                            <option  value="">Select Commodity</option>
+
+                            {this.state.commodities.map((ix,index)=>{
+
+                          return <option key={index} value={ix.name}>{ix.name}</option> 
+                              
+                                 
+                            })}
+                            </Form.Control>
+          </Form.Group>
+                )
+      }
+    }
+    
     return (
       <div>
             <div className="row">
@@ -18,14 +109,19 @@ export default class Stepone extends Component {
                         <form className="forms-sample" >
                         <Form.Group>
                             <label htmlFor="exampleInputUsername1"><strong>Asset:</strong></label>
-                            <Form.Control as="select" custom  name="asset" value={values.asset}  onChange={handlechange}>
+                            <Form.Control as="select"   name="asset_type" value={values.asset_type}  onChange={handlechange}>
                             <option  value="">Select asset</option>
-                              <option value="gold">Gold</option>
-                              <option value="oil">Oil</option>
-                              <option value="currency">Currency</option>
+                              <option value="forex">Forex</option>
+                              <option value="indices">Indices</option>
+                              <option value="commodities">Commodities</option>
+                              <option value="cypto_currency">CryptoCurrency</option>
         
                               </Form.Control>
                         </Form.Group>
+
+
+                        {values.asset_type ? <AssetSwitch/> : null}
+
                         <Form.Group>
                             <label htmlFor="exampleInputUsername1"><strong>Entry Price:</strong></label>
                             <Form.Control
@@ -50,15 +146,14 @@ export default class Stepone extends Component {
                                 onChange={handlechange}/>
                         </Form.Group>
                         <Form.Group>
-                            <label htmlFor="exampleInputUsername1"><strong>Stop Loss 2:</strong></label>
-                            <Form.Control
-                            type="text"
-                            id="exampleInputUsername1"
-                            placeholder="stop_loss 2"
-                                size="lg"
-                                name="stop_loss2"
-                                value={values.stop_loss2} 
-                                onChange={handlechange}/>
+                            <label htmlFor="exampleInputUsername1"><strong>Signal Type:</strong></label>
+                            <Form.Control as="select"   name="signal_type" value={values.signal_type}  onChange={handlechange}>
+                            <option  value="">Buy Limit</option>
+                              <option value="gold">Sell Limit</option>
+                              <option value="oil">Buy stop</option>
+                              <option value="currency">Sell stop</option>
+        
+                              </Form.Control>
                         </Form.Group>
                         <Form.Group>
                             <label htmlFor="exampleInputUsername1"><strong>Take Profit 1(Tp1):</strong></label>
@@ -91,5 +186,8 @@ export default class Stepone extends Component {
             </div>
       </div>
     )
+
+
+    
   }
 }

@@ -1,0 +1,25 @@
+[
+
+    {"name":"ALUMINIUM","size_of_pip":"1"},
+    {"name":"BUND10Y","size_of_pip":"0,01"},
+    {"name":"COCOA","size_of_pip":"1"},
+    {"name":"COFFEE","size_of_pip":"0,01"},
+    {"name":"COPPER","size_of_pip":"1"},
+    {"name":"CORN","size_of_pip":"0,01"},
+    {"name":"COTTON","size_of_pip":"0,01"},
+    {"name":"EMISS","size_of_pip":"0,01"},
+    {"name":"GOLD","size_of_pip":"0,01"},
+    {"name":"NATGAS","size_of_pip":"0,001"},
+    {"name":"NICKEL","size_of_pip":"1"},
+    {"name":"OIL","size_of_pip":"0,01"},
+    {"name":"OIL.WTI","size_of_pip":"0,01"},
+    {"name":"PLATINUM","size_of_pip":"0,1"},
+    {"name":"SCHATZ2Y","size_of_pip":"0,01"},
+    {"name":"SILVER","size_of_pip":"0,001"},
+    {"name":"SOYBEAN","size_of_pip":"0,01"},
+    {"name":"SUGAR","size_of_pip":"0,01"},
+    {"name":"TNOTE","size_of_pip":"0,01"},
+    {"name":"WHEAT","size_of_pip":"0,01"},
+    {"name":"ZINC","size_of_pip":"1"}
+   
+]

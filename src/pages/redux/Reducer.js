@@ -18,6 +18,13 @@ const initialstate={
 
 }
 
+const forexinitial={
+  isFetching:false,
+  hasError:false,
+  errorMessage:'',
+  rates:null
+}
+
 const stateReducer=(state=initialstate,action)=>{
    switch(action.type){
      case 'STATE_FETCHING':
@@ -42,6 +49,40 @@ const stateReducer=(state=initialstate,action)=>{
    }
 }
 
+const Forex=(state=forexinitial,action)=>{
+    switch(action.type) 
+    {
+      case 'FETCH_START':
+          return{
+              ...state,isFetching:true
+            }
+        
+      case 'FETCH_END':
+        const{rates}=action
+        return {
+          ...state,
+          isFetching: false,
+          hasError: false,
+          rates
+        }
+      
+      case 'FETCH_ERROR':
+        const {error}=action
+        return {
+          ...state,
+          isFetching: false,
+          hasError: true,
+          rates:null,
+          errorMessage: error
+        }
+        
+        default: 
+        return state
+        
+
+    }
+
+}
 
 
 const Auth=(state=AuthinitialState,action)=>{
@@ -144,7 +185,9 @@ const Auth=(state=AuthinitialState,action)=>{
 const Rootreducer= combineReducers({
   stateReducer,
  
-      Auth
+      Auth,
+
+      Forex
 
 })
 

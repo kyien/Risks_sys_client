@@ -3,6 +3,8 @@ import logo from '../assets/img/knight.png';
 import './App.css';
 import LoginModal from './SigninModal'
 import SignupModal from './SignupModal'
+import { connect } from "react-redux"
+import {getForex} from '../pages/redux/Action'
 
 
  class Main extends Component {
@@ -13,6 +15,11 @@ import SignupModal from './SignupModal'
     type:''
   }
  
+async componentDidMount(){
+
+  await this.props.getForex()
+}
+
   onOpenModal (name,type) {
     this.setState({[name] : true, type:type })
   }
@@ -39,9 +46,10 @@ link={this.state.type ==='trader'?()=>this.onOpenModal('opensignin','trader'):()
 />
      
   <section id="topbar" className="d-none d-lg-block">
-
+    <div className="row">
+    <div className="col-md-4">
     <div className="container clearfix">
-      <div className="contact-info float-left">
+      <div className="contact-info">
         <i className="icofont-envelope"></i><span className="diff-link" >contact@knightingale.ke</span>
         <i className="icofont-phone"></i>
         <span>+254 7000 0000</span>
@@ -52,8 +60,28 @@ link={this.state.type ==='trader'?()=>this.onOpenModal('opensignin','trader'):()
          {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
          
 
-         {/* <div className="dropdown custom-div2">  */}
-        <button type="button" className="btn btn-primary btn-lg dropdown-toggle custom-div2"
+       
+       
+           </div>
+           </div>
+       <div className="col-md-4"></div>
+       <div className="col-md-4">
+      <div className="social-links  dyv">
+      
+        <a href="#" className="twitter"><i className="icofont-twitter"></i></a>
+        <a href="#" className="facebook"><i className="icofont-facebook"></i></a>
+        <a href="#" className="instagram"><i className="icofont-instagram"></i></a>
+        <a href="#" className="skype"><i className="icofont-skype"></i></a>
+        <a href="#" className="linkedin"><i className="icofont-linkedin"></i></a>
+      </div>
+      </div>
+    </div>
+
+    <div className="row">
+      <div className="col-md-4"></div>
+        <div className="col-md-2">
+    <div className="dropdown"> 
+        <button type="button" className="btn btn-primary btn-lg dropdown-toggle "
                 id="dropdownMenuBtn"
                 data-toggle="dropdown"
                   aria-haspopup="true" 
@@ -63,10 +91,12 @@ link={this.state.type ==='trader'?()=>this.onOpenModal('opensignin','trader'):()
               <a className="dropdown-item" href="#" onClick={()=>this.onOpenModal('opensignin','trader')}>Trader</a>
               <a className="dropdown-item" href="#" onClick={()=>this.onOpenModal('opensignin','client')}>Client</a>
              
-                   {/* </div>  */}
+                   </div> 
                    </div>
-
-         <div className="dropdown custom-div1"> 
+                   </div> 
+                <div className="col-md-1"></div>
+              <div className="col-md-2">
+         <div className="dropdown "> 
          <button type="button" className="btn btn-primary btn-lg dropdown-toggle "
          id="dropdownMenuBtn"
                 data-toggle="dropdown"
@@ -79,18 +109,8 @@ link={this.state.type ==='trader'?()=>this.onOpenModal('opensignin','trader'):()
               <a className="dropdown-item top-link-drop" href="#"  onClick={()=>this.onOpenModal('opensignup','client')}>Client</a>
                    </div> 
            </div> 
-       
-        
-          
-       
-      <div className="social-links float-right dyv">
-      
-        <a href="#" className="twitter"><i className="icofont-twitter"></i></a>
-        <a href="#" className="facebook"><i className="icofont-facebook"></i></a>
-        <a href="#" className="instagram"><i className="icofont-instagram"></i></a>
-        <a href="#" className="skype"><i className="icofont-skype"></i></a>
-        <a href="#" className="linkedin"><i className="icofont-linkedin"></i></a>
-      </div>
+           </div>
+           <div className="col-md-3"></div>
     </div>
   </section>
 
@@ -187,6 +207,37 @@ link={this.state.type ==='trader'?()=>this.onOpenModal('opensignin','trader'):()
         <div className="side-feed">
 
             <h1 className="fx-stack"><p>FOREX RATES</p></h1>
+                <br/>
+          { this.props.fxrates ? <table className="table table-striped table-dark">
+
+              <tbody>
+                <tr>
+                  <td>EUR/GBP</td>
+                  <td>{this.props.fxrates.EURGBP.rate}</td>
+                </tr>
+                <tr>
+                  <td>USD/JPY</td>
+                  <td>{this.props.fxrates.USDJPY.rate}</td>
+                </tr>
+                <tr>
+                  <td>USD/EUR</td>
+                  <td>{this.props.fxrates.USDEUR.rate}</td>
+                </tr>
+                <tr>
+                  <td>NZD/USD</td>
+                  <td>{this.props.fxrates.NZDUSD.rate}</td>
+                </tr>
+                <tr>
+                  <td>AUD/USD</td>
+                  <td>{this.props.fxrates.AUDUSD.rate}</td>
+                </tr>
+                <tr>
+                  <td>USD/CHF</td>
+                  <td>{this.props.fxrates.USDCHF.rate}</td>
+                </tr>
+              </tbody>
+
+            </table>  :  <h3 className="fx-stack"><p>loading ....</p></h3> }
           
           </div>
     </div>
@@ -199,4 +250,20 @@ link={this.state.type ==='trader'?()=>this.onOpenModal('opensignin','trader'):()
 }
 }
 
-export default Main;
+
+
+
+const mapStateToProps=(state)=>{
+  return{
+    // AuthUser:state.Auth.user, 
+    fxrates:state.Forex.rates
+  }
+}
+
+const mapDispatchToProps={
+
+  getForex
+
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Main);

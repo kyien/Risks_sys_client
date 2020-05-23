@@ -9,11 +9,12 @@ export default class Verification extends Component {
         step:1,
         entry_price:0.00,
         stop_loss1:0,
-        stop_loss2:0,
+        signal_type:'',
         tp1:0,
         tp2:0,
         time_frame:'',
         comment:'',
+        asset_type:'',
         asset:''
     }
 
@@ -36,8 +37,8 @@ export default class Verification extends Component {
 
     }
   render() {
-    const {step,entry_price,stop_loss1,stop_loss2,tp1,tp2,time_frame,comment,asset} =this.state
-    const values={entry_price,stop_loss1,stop_loss2,tp1,tp2,time_frame,comment,asset}
+    const {step,entry_price,stop_loss1,signal_type,tp1,tp2,time_frame,comment,asset,asset_type} =this.state
+    const values={entry_price,stop_loss1,signal_type,tp1,tp2,time_frame,comment,asset,asset_type}
 
     switch(step){
         case 1:

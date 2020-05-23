@@ -115,20 +115,15 @@ class TraderSidebar extends Component {
           </li>
           <li className={ this.isPathActive('/dashboard') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/trader/dashboard">
-              <i className="mdi mdi-television menu-icon"></i>
+              <i className="mdi mdi-chart-pie menu-icon"></i>
               <span className="menu-title">Dashboard</span>
             </Link>
           </li>
-          <li className={ this.isPathActive('/dashboard') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="#">
-              <i className="mdi mdi-television menu-icon"></i>
-              <span className="menu-title">My Fx Profile (in progress)</span>
-            </Link>
-          </li>
-          <li className={ this.isPathActive('/dashboard') ? 'nav-item active' : 'nav-item' }>
-            <Link className="nav-link" to="#">
-              <i className="mdi mdi-television menu-icon"></i>
-              <span className="menu-title">Statistics(in progress)</span>
+         
+          <li className={ this.isPathActive('/charts') ? 'nav-item active' : 'nav-item' }>
+            <Link className="nav-link" to="/trader/chart">
+              <i className="mdi mdi-finance menu-icon"></i>
+              <span className="menu-title">Charts Analysis</span>
             </Link>
           </li>
           <li className={ this.isPathActive('/transfer') ? 'nav-item active' : 'nav-item' }>
@@ -147,8 +142,8 @@ class TraderSidebar extends Component {
           </li>
           <li className={ this.isPathActive('/trade-options') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.tradeOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('tradeOpen') } data-toggle="collapse">
-              <i className="mdi mdi-currency-btc menu-icon"></i>
-              <span className="menu-title">Place Trade</span>
+              <i className="mdi mdi-timer-sand menu-icon"></i>
+              <span className="menu-title">Trade</span>
               <i className="menu-arrow"></i>
             </div>
             <Collapse in={ this.state.tradeOpen }>

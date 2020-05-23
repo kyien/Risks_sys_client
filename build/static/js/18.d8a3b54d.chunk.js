@@ -1,2 +1,0 @@
-(this["webpackJsonpstar-admin-free-react"]=this["webpackJsonpstar-admin-free-react"]||[]).push([[18],{384:function(e,t,n){"use strict";n.r(t),n.d(t,"BlankPage",(function(){return o}));var a=n(4),r=n(5),c=n(6),u=n(7),i=n(0),s=n.n(i),o=function(e){Object(u.a)(n,e);var t=Object(c.a)(n);function n(){return Object(a.a)(this,n),t.apply(this,arguments)}return Object(r.a)(n,[{key:"render",value:function(){return s.a.createElement("div",null)}}]),n}(i.Component);t.default=o}}]);
-//# sourceMappingURL=18.d8a3b54d.chunk.js.map

@@ -9,6 +9,7 @@ const Verification=lazy(() => import('../../pages/trader/Account/Verification'))
 const Deposit=lazy(() => import('../../pages/trader/Finances/Deposit'));
 const Withdraw=lazy(() => import('../../pages/trader/Finances/Withdraw'));
 const Trades=lazy(() => import('../../pages/trader/Trades/Live'));
+const ChartFrame=lazy(()=> import('../../pages/trader/Chart/chart-frame'))
 
 export default function TraderRoutes() {
   return (
@@ -23,7 +24,8 @@ export default function TraderRoutes() {
           <Route exact path="/trader/transfer/deposit" component={Deposit} />
           <Route exact path="/trader/transfer/withdraw" component={Withdraw} />
           <Route exact path="/trader/trades/live" component={Trades} />
-
+          <Route exact path="/trader/chart" component={ChartFrame}/>
+          
       <Redirect to="/trader/dashboard" />
     </Switch>
   </Suspense>

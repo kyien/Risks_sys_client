@@ -5,9 +5,10 @@ import {connect} from 'react-redux'
  class Edit extends Component {
 
     state={
-        // image:this.props.AuthUser.avatar,
-        username:'',
-        email:'',
+        image:this.props.AuthUser.avatar,
+        username:this.props.AuthUser.username,
+        email:this.props.AuthUser.email,
+        // approved:this.props.AuthUser.approved?true:false,
         show:false
     }
 
@@ -57,11 +58,11 @@ import {connect} from 'react-redux'
                 <h4 className="card-title">Edit Profile</h4>
 
                 <div className="col-md-4 offset-md-3">
-                <Image src={this.props.AuthUser.avatar} roundedCircle />
+                <Image src={this.state.image} roundedCircle width="200px"  height="200px"/>
                 </div>
                 <form className="forms-sample" onSubmit={this.onSubmit}>
                   <Form.Group>
-                    <label htmlFor="exampleInputUsername1"></label>
+                    <label htmlFor="exampleInputUsername1">My username:</label>
                     <Form.Control
                      type="text"
                       id="exampleInputUsername1"
@@ -69,15 +70,37 @@ import {connect} from 'react-redux'
                         size="lg"
                         name="username"
                          value={this.state.username} 
-                          onChange={this.changeHandler}/>
+                          onChange={this.changeHandler}
+                          />
                   </Form.Group>
                   <Form.Group>
-                    <label htmlFor="exampleInputEmail1">email</label>
-                    <Form.Control type="text" className="form-control" name="email" value={this.state.email}
+                    <label htmlFor="exampleInputEmail1">My email:</label>
+                    <Form.Control type="text" className="form-control" name="email" value={this.props.AuthUser.email}
                      id="exampleInputEmail1" placeholder="Change email" onChange={this.changeHandler}/>
                   </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="exampleInputEmail1"> Approved:</label>
+                    <Form.Control type="text" className="form-control" name="email" value={this.props.AuthUser.approved ?"true":"false"}
+                     id="exampleInputEmail1" placeholder="Change email" disabled/>
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="exampleInputEmail1">Win ratio:</label>
+                    <Form.Control type="text" className="form-control" name="email" value={this.props.AuthUser.win_ratio}
+                     id="exampleInputEmail1" placeholder="Change email" disabled/>
+                  </Form.Group>
+                  <Form.Group>
+                    <label htmlFor="exampleInputEmail1">Loss ratio:</label>
+                    <Form.Control type="text" className="form-control" name="email" value={this.props.AuthUser.loss_ratio}
+                     id="exampleInputEmail1" placeholder="Change email" disabled/>
+                  </Form.Group>
                  
-                  <button type="submit" className="btn btn-primary mr-2" >Submit</button>
+                  <Form.Group>
+                    <label htmlFor="exampleInputEmail1">Profit Factor:</label>
+                    <Form.Control type="text" className="form-control" name="email" value={this.props.AuthUser.profit_factor}
+                     id="exampleInputEmail1" placeholder="Change email"  disabled/>
+                  </Form.Group>
+                 
+                  <button type="submit" className="btn btn-primary mr-2" >Save Changes</button>
                 </form>
               </div>
             </div>
