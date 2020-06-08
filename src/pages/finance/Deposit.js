@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Form,Modal,Button } from 'react-bootstrap'
+import { connect } from "react-redux"
+import {clientDepositMpesa} from '../../pages/redux/Action'
 
-export default class Deposit extends Component {
+ class Deposit extends Component {
 
 
     state = {
@@ -21,7 +23,7 @@ export default class Deposit extends Component {
 
       onSubmit=(event)=> {
             event.preventDefault()
-
+            this.props.clientDepositMpesa(this.state.phone,this.state.amount)
           this.setState({show:true})
 
       }
@@ -37,10 +39,9 @@ export default class Deposit extends Component {
               return(
 
                 <Form.Group>
-                <label htmlFor="exampleInputUsername1">Phone No</label>
+                <label htmlFor="examplephone">Phone No</label>
                 <Form.Control
                  type="text"
-                  id="exampleInputUsername1"
                    placeholder="Enter valid mpesa phone."
                     size="lg"
                     name="phone"
@@ -55,10 +56,9 @@ export default class Deposit extends Component {
               case 'paypal':
                 return(
                   <Form.Group>
-                  <label htmlFor="exampleInputUsername1">Paypal Email</label>
+                  <label htmlFor="exampleInputpaypal">Paypal Email</label>
                   <Form.Control
                    type="text"
-                    id="exampleInputUsername1"
                      placeholder="Enter your paypal email"
                       size="lg"
                       name="email"
@@ -73,10 +73,9 @@ export default class Deposit extends Component {
                   return(
 
               <Form.Group>
-              <label htmlFor="exampleInputUsername1">Account No</label>
+              <label htmlFor="exampleInputAcc">Account No</label>
               <Form.Control
                type="text"
-                id="exampleInputUsername1"
                  placeholder="Enter Bank Account no."
                   size="lg"
                   name="acc_no"
@@ -145,7 +144,8 @@ export default class Deposit extends Component {
                               </Form.Control>
                   </Form.Group>
 
-                  {this.state.payment_option ? <PaymentSwitch/> : null}
+                  {this.state.payment_option ? PaymentSwitch(): null}
+                  
                 
                   <button type="submit" className="btn btn-primary mr-2" >Submit</button>
                 </form>
@@ -159,3 +159,10 @@ export default class Deposit extends Component {
         )
     }
 }
+
+const mapDispatchToProps={
+
+  clientDepositMpesa
+
+}
+export default connect(null,mapDispatchToProps)(Deposit)

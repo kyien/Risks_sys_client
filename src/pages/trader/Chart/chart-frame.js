@@ -7,11 +7,11 @@ export default class ChartFrame extends Component {
         return (
             <div>
 
-<Iframe url="https://demo.chartiq.com/"
+<Iframe src="https://demo.chartiq.com/"
         width="1100px"
         height="700px"
         allowFullScreen
-        loading="lazy"
+        // loading="lazy"
         // id="myId"
         // className="myClassname"
         display="initial"

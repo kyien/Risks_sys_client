@@ -8,7 +8,8 @@ const AuthinitialState = {
     hasError: false,
     errorMessage: '',
     user: null,
-    usertype:''
+    usertype:'',
+    acc_balance:0
   }
 
 const initialstate={
@@ -173,6 +174,15 @@ const Auth=(state=AuthinitialState,action)=>{
               user: null,
               errorMessage: error
             };
+          }
+
+          case 'FETCH_BALANCE':{
+            const {amount}=action
+            let curr_amount={...state.acc_balance}
+            return {
+              ...state,
+              acc_balance:curr_amount+amount
+            }
           }
          
           default: {

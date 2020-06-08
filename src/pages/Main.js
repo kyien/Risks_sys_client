@@ -163,8 +163,8 @@ link={this.state.type ==='trader'?()=>this.onOpenModal('opensignin','trader'):()
           <div className="carousel-item active slide1">
             <div className="carousel-container">
               <div className="carousel-content container">
-                <h2 className="animated fadeInDown">Welcome to <span>Risksys</span></h2>
-                <p className="animated fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <h2 className="animated fadeInDown">Welcome to <span>Knightingale</span></h2>
+                <p className="animated fadeInUp">Knightingale Limited is an investment company offering money management services to institutions and individuals in order to provide superior investment performance across diverse global financial markets instruments.</p>
                 <a href="#about" className="btn-get-started animated fadeInUp scrollto">Read More</a>
               </div>
             </div>
@@ -174,8 +174,8 @@ link={this.state.type ==='trader'?()=>this.onOpenModal('opensignin','trader'):()
           <div className="carousel-item slide2" >
             <div className="carousel-container">
               <div className="carousel-content container">
-                <h2 className="animated fadeInDown">Lorem Ipsum Dolor</h2>
-                <p className="animated fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <h2 className="animated fadeInDown">Your  Investment Market Place</h2>
+                <p className="animated fadeInUp">The company has structured innovative trading strategies that are keen on addressing key issues in the African economy. The company prides itself as a premier money manager in Kenya and Sub-Saharan Africa because of its ability to generate premier returns in the market through its controlled and structured investments in foreign exchange, commodity and money markets.</p>
                 <a href="#about" onClick={()=>this.onOpenModal('opensignup')} className="btn-get-started animated fadeInUp scrollto">JOIN</a>
               </div>
             </div>
@@ -184,8 +184,13 @@ link={this.state.type ==='trader'?()=>this.onOpenModal('opensignin','trader'):()
           <div className="carousel-item slide3" >
             <div className="carousel-container">
               <div className="carousel-content container">
-                <h2 className="animated fadeInDown">Sequi ea ut et est quaerat</h2>
-                <p className="animated fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <h2 className="animated fadeInDown">Your Investment Market Place</h2>
+                <p className="animated fadeInUp">Using proprietary in-house methods, processes and
+                 a superior risk management system, the company maximizes opportunity, minimizes 
+                 drawdowns and identifies and capitalizes on nascent trends. 
+                 In addition to a robust operational and oversight framework, 
+                 strong money management is used to optimize risk and return objectives of the various 
+                 funds run by the company.With our robust risk management system, the company through its fund has consistently delivered annualized returns of above 24%. Our customizable system allows our clients define their risk profile and therefore ae able to consistently generate above market returns in their preferred assets. </p>
                 <a href="#about" onClick={()=>this.onOpenModal('opensignup')} className="btn-get-started animated fadeInUp scrollto">JOIN</a>
               </div>
             </div>

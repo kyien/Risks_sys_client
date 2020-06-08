@@ -146,8 +146,8 @@ class ClientSidebar extends Component {
             </div>
             <Collapse in={  this.state.accPagesOpen }>
               <ul className="nav flex-column sub-menu">
-                <li className="nav-item"> <Link className={ this.isPathActive('/client/account/verification') ? 'nav-link active' : 'nav-link' } to="/account/verification">Verification</Link></li>
-                <li className="nav-item"> <Link className={ this.isPathActive('/client/account/edit') ? 'nav-link active' : 'nav-link' } to="/account/edit">Edit Profile</Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/client/account/verification') ? 'nav-link active' : 'nav-link' } to="/client/account/verification">Verification</Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/client/account/edit') ? 'nav-link active' : 'nav-link' } to="/client/account/edit">Edit Profile</Link></li>
               </ul>
             </Collapse>
           </li>

@@ -161,7 +161,7 @@
   // jQuery counterUp
   $('[data-toggle="counter-up"]').counterUp({
     delay: 10,
-    time: 1000
+    time: 3000
   });
 
   // Porfolio isotope and filter
@@ -188,7 +188,7 @@
 
   // Initi AOS
   AOS.init({
-    duration: 1000,
+    duration: 2000,
     easing: "ease-in-out-back"
   });
 

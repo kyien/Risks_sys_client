@@ -55,7 +55,7 @@ export default class Trades extends Component {
                 id="exampleInputUsername1"
                  placeholder="Enter the % risk for this account"
                   size="lg"
-                  name="phone"
+                  name="risk"
                    value={this.state.risk} 
                     onChange={this.valuechange}
           
@@ -114,7 +114,7 @@ export default class Trades extends Component {
                               </Form.Control>
                           </Form.Group>
 
-                              {this.state.account_type == 'pamm' ? <PAMM /> :null}
+                              {this.state.account_type == 'mamm' ? PAMM() :null}
                          
 
                               <Form.Group>

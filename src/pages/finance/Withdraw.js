@@ -140,7 +140,7 @@ export default class Withdraw extends Component {
                               </Form.Control>
                   </Form.Group>
 
-                  {this.state.payment_option ? <PaymentSwitch/> : null}
+                  {this.state.payment_option ? PaymentSwitch() : null}
                  
                   <button type="submit" className="btn btn-primary mr-2">Submit</button>
                 </form>

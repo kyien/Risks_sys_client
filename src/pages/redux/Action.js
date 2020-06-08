@@ -9,6 +9,20 @@ import * as calc from './functionz'
       type:'STATE_HAS_ERROR',
       error
     })
+
+    export const not_fetching=()=>({
+      type:'STATE_NOT_FETCHING'
+    })
+    export const state_fetching=()=>({
+      type:'STATE_FETCHING'
+    })
+    
+      export const state_fetch_error= error =>({
+        type:'STATE_HAS_ERROR',
+        error
+      })  
+
+
     //Auth Actions
     export const registerStart = () => ({
       type: 'REGISTER_START',
@@ -262,4 +276,36 @@ import * as calc from './functionz'
           dispatch(forexerr(error))
         })
 
+    }
+
+    ///Client Mpesa
+    export const clientbalance= amount=>({
+
+        type:'FETCH_BALANCE',
+        amount
+    })
+
+    export const clientDepositMpesa=(phone,amount)=>async(dispatch)=>{
+      // dispatch(state_fetching())
+      await axios.post('https://api.sortika.com/client/payment/test',{
+        phone:phone,
+        amount:amount
+      }).then( async (res)=>{
+
+        console.log(res)
+        let mID=res.data.MerchantRequestID
+
+          await axios.post('https://api.sortika.com/client/payment/query',{
+            id:mID
+          }).then((res)=>{
+            console.log(res)
+            dispatch(clientbalance(res.data.info[0].Amount_paid))
+          }).catch(error=>console.log(error))
+
+          // if(res.ResponseCode==0){
+        // let mID=res.MerchantRequestID
+          // }
+      }).catch((error)=>{
+        console.log(error)
+      })
     }

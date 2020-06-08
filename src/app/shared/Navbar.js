@@ -23,12 +23,16 @@ class Navbar extends Component {
               <a href="!#" onClick={evt =>evt.preventDefault()} className="nav-link">
                 <i className="mdi mdi-elevation-rise"></i>Reports</a>
             </li> */}
-            {/* <li className="nav-item d-none d-lg-flex">
+            <li className="nav-item d-none d-lg-flex">
               <a href="!#" onClick={evt =>evt.preventDefault()} className="nav-link">
-                <i className="mdi mdi-bookmark-plus-outline"></i>Score</a>
-            </li> */}
+                <i className="mdi mdi-bookmark-plus-outline"></i>Current Balance:</a>
+            </li>
           </ul>
           <ul className="navbar-nav navbar-nav-right ml-lg-auto">
+          <li className="nav-item d-none d-lg-flex">
+              <a href="!#" onClick={evt =>evt.preventDefault()} className="nav-link">
+              Current Balance: <i className="mdi mdi-currency-usd"></i>{this.props.bal}</a>
+            </li>
             <li className="nav-item  nav-profile border-0">
               <Dropdown alignRight>
                 <Dropdown.Toggle className="nav-link count-indicator p-0 toggle-arrow-hide bg-transparent">
@@ -165,7 +169,8 @@ class Navbar extends Component {
 const mapStateToProps=(state)=>{
   return{
     AuthUser:state.Auth.user, 
-    Token:state.Auth.token 
+    Token:state.Auth.token ,
+    bal:state.Auth.acc_balance
   }
 }
 
