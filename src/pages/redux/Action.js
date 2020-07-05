@@ -16,7 +16,11 @@ import * as calc from './functionz'
     export const state_fetching=()=>({
       type:'STATE_FETCHING'
     })
-    
+    export const state_success=(message)=>({
+      type:'STATE_SUCCESSFUL',
+      message
+      
+    })
       export const state_fetch_error= error =>({
         type:'STATE_HAS_ERROR',
         error
@@ -28,11 +32,14 @@ import * as calc from './functionz'
       type: 'REGISTER_START',
     })
     
-    export const registerFinished = (user,token,usertype) => ({
-      type: 'REGISTER_FINISHED',
+    export const registerClientFinished=(message)=>({
+      type:'REGISTER_CLIENT_FINISHED',
+      message
+    })
+    export const registertraderFinished = (user,token) => ({
+      type: 'REGISTER_TRADER_FINISHED',
       user,
-      token,
-      usertype
+      token
     })
 
     export const registerError = error => ({
@@ -66,16 +73,24 @@ import * as calc from './functionz'
         email:email,
         password:pass
       })
-      .then( async(res)=>{ 
+      .then((res)=>{ 
              
         console.log(res.data)
-           await  dispatch(registerFinished(res.data.user,res.data.access_token,'client'))
+          if(res.status==201){
+            dispatch(registerClientFinished('Success! Kindly check your mail for email verification link'))
+          }
+          else if(res.status == 203){
+            dispatch(registerError(res.data.message))
+          }
+          else {
+            dispatch(registerError('server error encountered!'))
+          }
           })
           
   .catch ((error) =>{
     
     console.log(error);
-    dispatch(registerError(error))
+    dispatch(registerError(error.message))
  
     
   })
@@ -121,13 +136,13 @@ import * as calc from './functionz'
             }).then( async(res)=>{ 
                   
                       console.log(res.data)
-                        await  dispatch(registerFinished(res.data.user,res.data.access_token,'trader'))
+                        await  dispatch(registertraderFinished(res.data.user,res.data.access_token))
                         })
                         
                 .catch ((error) =>{
                   
                   console.log(error);
-                  dispatch(registerError(error))
+                  dispatch(registerError(error.message))
               
                   
                 })
@@ -172,18 +187,28 @@ import * as calc from './functionz'
           email:email,
           password:pass
         })
-        .then( async(res)=>{ 
-               
-          console.log(res.data)
-             await  dispatch(loginFinished(res.data.user,res.data.access_token,'client'))
+        .then((res)=>{ 
+          console.log(res.status)
+          switch(res.status){
+            case 201:
+                dispatch(loginFinished(res.data.user,res.data.access_token,'client'))
+            break
+            case 401:
+              dispatch(loginError(res.data.message))
+              break
+            case 417:
+                dispatch(loginError(res.data.message))
+                break
+            default:
+                  dispatch(loginError('server error'))
+          }
             })
             
     .catch ((error) =>{
       
-      console.log(error);
-      dispatch(loginError(error))
+      console.log(error.message);
+      dispatch(loginError('invalid email/password'))
    
-      
     })
       }
       export const loginTraderUser =  (email,pass) => async(dispatch)=>{
@@ -191,12 +216,7 @@ import * as calc from './functionz'
         console.log('trader ..............')
         await axios.post('https://api.sortika.com/trader/login',
 
-        // {
-        //   headers:{
-        //     'Access-Control-Allow-Origin': '*',
-        //     'Content-Type': 'application/json',
-        //   }
-        // },
+
         {
           email:email,
           password:pass
@@ -204,13 +224,26 @@ import * as calc from './functionz'
         .then( async(res)=>{ 
                
           console.log(res.data)
-             await  dispatch(loginFinished(res.data.user,res.data.access_token,'trader'))
+          switch(res.status){
+            case 201:
+              await  dispatch(loginFinished(res.data.user,res.data.access_token,'trader'))
+
+            break
+            case 401:
+              dispatch(loginError(res.data.message))
+              break
+            case 417:
+                dispatch(loginError(res.data.message))
+                break
+            default:
+                  dispatch(loginError('server error'))
+          }
             })
             
     .catch ((error) =>{
       
       console.log(error);
-      dispatch(loginError(error))
+      dispatch(loginError('invalid email/password'))
    
       
     })
@@ -307,5 +340,70 @@ import * as calc from './functionz'
           // }
       }).catch((error)=>{
         console.log(error)
+      })
+    }
+
+    //forgot password
+    export const submitForgotemailTrader=(email)=>async(dispatch)=>{
+            dispatch(state_fetching())
+            await axios.post('https://api.sortika.com/trader/forgot_password',
+            {
+              email:email
+            }).then((res)=>{
+                 
+              switch(res.status){
+
+                case 201:
+                    dispatch(state_success(res.data.message))
+      
+                break
+                case 417:
+                    dispatch(state_fetch_error(res.data.message))
+                break
+      
+                case 401:
+                    dispatch(state_fetch_error(res.data.message))
+                break
+      
+                default:
+                    dispatch(state_fetch_error('Server error encountered'))
+      
+              }
+            
+            }).catch((error)=>{
+              console.log(error)
+              dispatch(state_fetch_error('server error encountered'))
+            })
+
+    }
+    export const submitForgotemailClient=(email)=>async(dispatch)=>{
+      dispatch(state_fetching())
+      await axios.post('https://api.sortika.com/client/forgot_password',
+      {
+        email:email
+      }).then((res)=>{
+           console.log(res)
+        switch(res.status){
+
+          case 201:
+              dispatch(state_success(res.data.message))
+
+          break
+          case 203:
+              dispatch(state_fetch_error(res.data.message))
+          break
+
+          case 401:
+              dispatch(state_fetch_error(res.data.message))
+          break
+
+          default:
+              dispatch(state_fetch_error('Server error encountered'))
+
+        }
+      
+      }).catch((error)=>{
+        console.log(error)
+        dispatch(state_fetch_error('Server error encountered'))
       })
     }

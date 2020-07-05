@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 // import './index.css';
 // import { get_petty_cash,getsales } from "./components/redux/Actions"
-import Main from './Main';
-import Auth from './Auth';
+// import Main from './frontend/Main';
+import FrontRoutes from './frontend/routing'
+import Auth from './backend/Auth';
 import { connect } from "react-redux"
 import { BrowserRouter as Router } from 'react-router-dom'
 
@@ -15,9 +16,9 @@ class CheckAuth extends Component {
 
     if(!this.props.Authenticated){
       return (
-       
-            <Main/>
-        
+      <Router>
+            <FrontRoutes/>
+        </Router>
       ) 
     }
     else{

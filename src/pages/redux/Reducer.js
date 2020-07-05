@@ -7,15 +7,18 @@ const AuthinitialState = {
     isFetching:false,
     hasError: false,
     errorMessage: '',
+    successMessage:'',
     user: null,
     usertype:'',
-    acc_balance:0
+    acc_balance:0.00
   }
 
 const initialstate={
   isFetching:false,
   hasError:false,
-  errorMessage:''
+  errorMessage:'',
+  responseMessage:'',
+  type:''
 
 }
 
@@ -40,8 +43,17 @@ const stateReducer=(state=initialstate,action)=>{
          case 'STATE_HAS_ERROR':
             const { error } = action
             return{
-              ...state,hasError:true,errorMessage:error
+              ...state,isFetching:false,hasError:true,errorMessage:error
             }
+
+            case 'STATE_SUCCESSFUL':
+              const {message} =action
+              return {
+                ...state,
+                isFetching:false,
+                responseMessage:message,
+                
+              }
 
             default: 
             return state
@@ -152,13 +164,22 @@ const Auth=(state=AuthinitialState,action)=>{
               isFetching: true
             };
           }
-          case 'REGISTER_FINISHED': {
-            const { user,token,usertype} = action
+
+          case 'REGISTER_CLIENT_FINISHED':{
+
+            const {message}=action
+            return{
+              ...state,
+              isFetching:false,
+              successMessage:message
+            }
+          }
+          case 'REGISTER_TRADER_FINISHED': {
+            const { user,token} = action
             return {
               ...state,
               user,
               token,
-              usertype:usertype,
               loggedIn: true,
               isFetching: false
             };
@@ -184,6 +205,7 @@ const Auth=(state=AuthinitialState,action)=>{
               acc_balance:curr_amount+amount
             }
           }
+          
          
           default: {
             return state

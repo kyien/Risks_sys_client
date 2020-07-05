@@ -12,3 +12,7 @@ body {
       monospace;
   }
   
+  .srv-validation-message {
+    color: #e64040;
+    font-size: 0.8rem;
+  }
