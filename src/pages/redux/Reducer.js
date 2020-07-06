@@ -175,12 +175,13 @@ const Auth=(state=AuthinitialState,action)=>{
             }
           }
           case 'REGISTER_TRADER_FINISHED': {
-            const { user,token} = action
+            const { user,token,type} = action
             return {
               ...state,
               user,
               token,
               loggedIn: true,
+              usertype:type,
               isFetching: false
             };
           }

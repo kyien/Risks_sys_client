@@ -36,10 +36,11 @@ import * as calc from './functionz'
       type:'REGISTER_CLIENT_FINISHED',
       message
     })
-    export const registertraderFinished = (user,token) => ({
+    export const registertraderFinished = (user,token,type) => ({
       type: 'REGISTER_TRADER_FINISHED',
       user,
-      token
+      token,
+      type
     })
 
     export const registerError = error => ({
@@ -136,7 +137,7 @@ import * as calc from './functionz'
             }).then( async(res)=>{ 
                   
                       console.log(res.data)
-                        await  dispatch(registertraderFinished(res.data.user,res.data.access_token))
+                        await  dispatch(registertraderFinished(res.data.user,res.data.access_token,'trader'))
                         })
                         
                 .catch ((error) =>{
@@ -215,8 +216,6 @@ import * as calc from './functionz'
         dispatch(loginStart())
         console.log('trader ..............')
         await axios.post('https://api.sortika.com/trader/login',
-
-
         {
           email:email,
           password:pass
@@ -224,12 +223,12 @@ import * as calc from './functionz'
         .then( async(res)=>{ 
                
           console.log(res.data)
-          switch(res.status){
-            case 201:
+          switch(res.data.code){
+            case 200:
               await  dispatch(loginFinished(res.data.user,res.data.access_token,'trader'))
 
             break
-            case 401:
+            case 412:
               dispatch(loginError(res.data.message))
               break
             case 417:

@@ -110,7 +110,7 @@ render(){
                    {
                        this.props.success_message ?
                        <div className="alert alert-success" role="alert">
-                        {this.props.err}
+                        {this.props.success_message}
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
