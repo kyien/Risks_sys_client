@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
 import Routes from './routes'
 import '../../app/App.scss';
-import Navbar from '../../app/shared/Navbar';
+import ClientNavbar from '../../app/shared/client/Navbar';
+import TraderNavbar from '../../app/shared/trader/Navbar';
 import ClientSidebar from '../../app/shared/client/Sidebar';
 import TraderSidebar from '../../app/shared/trader/Sidebar';
 import Footer from '../../app/shared/Footer';
@@ -17,7 +18,7 @@ import { connect } from "react-redux"
       this.onRouteChanged();
     }
   render() {
-    let navbarComponent = !this.state.isFullPageLayout ? <Navbar/> : '';
+    let navbarComponent = !this.state.isFullPageLayout ? this.props.usertype ==='trader'?<TraderNavbar/>:<ClientNavbar/> : '';
     let sidebarComponent = !this.state.isFullPageLayout ? this.props.usertype ==='trader'?<TraderSidebar/>:<ClientSidebar/> : '';
     let footerComponent = !this.state.isFullPageLayout ? <Footer/> : '';
     return (

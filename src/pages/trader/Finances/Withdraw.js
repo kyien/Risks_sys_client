@@ -1,27 +1,43 @@
 import React, { Component } from 'react'
 import { Form,Modal,Button } from 'react-bootstrap'
+import { connect } from "react-redux"
+import {TraderWithdraw} from '../../redux/Action'
+import SimpleReactValidator from 'simple-react-validator';
 
-export default class Withdraw extends Component {
+ class Withdraw extends Component {
 
-
-    state = {
+  constructor(){
+    super()
+    this.state = {
         amount: '',
         payment_option:'',
         acc_no:'',
         email:'',
         phone:'',
+        message:'',
         show:false
-      };
-     
+      }
+
+      this.validator = new SimpleReactValidator()
+
+    }
       changeHandler = event => {
         //event.preventDefault()
         this.setState({ [event.target.name]: event.target.value })
 
       }
 
-        onsubmit=(event)=>{
+        onsubmit=async (event)=>{
             event.preventDefault()
-            this.setState({show:true})
+            if(this.state.amount > this.props.bal){
+              this.setState({show:true,message:'You cannot withdraw more than your wallet balance'})
+
+            }
+            else{
+            await this.props.TraderWithdraw(this.state.amount,this.props.AuthUser.id)
+                 
+            this.setState({show:true,message:'Your request to withdraw was successful!'})
+            }
         }
     render() {
 
@@ -103,9 +119,9 @@ export default class Withdraw extends Component {
                         <Modal.Header closeButton>
                         <Modal.Title>withdrawal</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>Withdrawal processing Initiated...</Modal.Body>
+                        <Modal.Body>{this.state.message}</Modal.Body>
                         <Modal.Footer>
-                        <Button variant="primary" onClick={()=>this.setState({show:false})}>
+                        <Button variant="primary" onClick={()=>this.setState({show:false,amount:''})}>
                             Okay
                         </Button>
                         
@@ -125,10 +141,12 @@ export default class Withdraw extends Component {
                         size="lg"
                         name="amount"
                          value={this.state.amount} 
+                         onFocus={()=>this.validator.showMessageFor('amount')}
                           onChange={this.changeHandler}/>
                   </Form.Group>
-                 
-                  <Form.Group>
+                  {this.validator.message('amount', this.state.amount, 'required|numeric|min:0')}
+
+                  {/* <Form.Group>
                   <label htmlFor="exampleInputUsername1">Payment Platform</label>
                             <Form.Control as="select" custom="true"  name="payment_option" value={this.state.payment_option}  onChange={this.changeHandler}>
                             <option  value="">Select Payment option </option>
@@ -140,10 +158,15 @@ export default class Withdraw extends Component {
                               </Form.Control>
                   </Form.Group>
 
-                  {this.state.payment_option ? <PaymentSwitch/> : null}
+                  {this.state.payment_option ? <PaymentSwitch/> : null} */}
                  
-                  <button type="submit" className="btn btn-primary mr-2">Submit</button>
-                </form>
+                  {this.validator.allValid() ?
+                  <button type="submit" className="btn btn-primary mr-2" >Submit</button>
+                  : 
+                  <button type="submit" className="btn btn-primary mr-2" disabled>Submit</button>
+
+                  }                
+                  </form>
               </div>
             </div>
           </div>
@@ -154,3 +177,20 @@ export default class Withdraw extends Component {
         )
     }
 }
+
+const mapStateToProps=(state)=>{
+  return{
+    AuthUser:state.Auth.user, 
+    Token:state.Auth.token ,
+    bal:state.Auth.trader_acc_balance
+
+  }
+}
+const mapDispatchToProps={
+  
+  TraderWithdraw
+
+
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Withdraw)

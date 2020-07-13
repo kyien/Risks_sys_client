@@ -48,6 +48,22 @@ import * as calc from './functionz'
       error
     })
 
+    export const assetstart=()=>({
+      type:'FETCH_ASSETS_START',
+
+    })
+
+    export const assetfinished=(assets)=>({
+      type:'FETCH_ASSETS_END',
+      assets
+    })
+
+    export const assets_err=(error)=>({
+      type:'FETCH_ASSETS_ERROR',
+      error
+    })
+  
+
     export const forexstart=()=>({
       type:'FETCH_START',
 
@@ -97,7 +113,7 @@ import * as calc from './functionz'
   })
     }
    export const registerTraderUser =  (username,email,pass) => async(dispatch)=>{
-      dispatch(registerStart())
+      dispatch(registerStart())                                                                     
         let myfxprofile;
 
         await axios.post('https://api.sortika.com/trader/myfx/',
@@ -309,11 +325,38 @@ import * as calc from './functionz'
         })
 
     }
+    export const getAssets=()=>async(dispatch)=>{
+      dispatch(assetstart())
+
+        await axios.get('http://risk-api.sortika.com/api/v1/settings/assets',
+        {
+        headers:{
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        }
+      }
+        ).then((res)=>{
+          console.log(res.data)
+          dispatch(assetfinished(res.data))
+        }).catch((error)=>{
+          console.log(error)
+          dispatch(assets_err(error))
+        })
+
+    }
+
+
+
 
     ///Client Mpesa
     export const clientbalance= amount=>({
 
-        type:'FETCH_BALANCE',
+        type:'FETCH_CLIENT_BALANCE',
+        amount
+    })
+    export const traderbalance= amount=>({
+
+        type:'FETCH_TRADER_BALANCE',
         amount
     })
 
@@ -342,6 +385,107 @@ import * as calc from './functionz'
       })
     }
 
+    export const clientDeposit=(id,amount)=>async(dispatch)=>{
+      dispatch(state_fetching())
+      await axios.post('https://api.sortika.com/client/deposit',{
+        id:id,
+            amount:amount
+      }).then( async (res)=>{
+
+        console.log(res)
+        dispatch(clientbalance(res.data.balance))
+        dispatch(not_fetching())
+
+      
+      }).catch((error)=>{
+        console.log(error)
+      })
+    }
+
+    export const ClientWithdraw=(amount,id)=>async(dispatch)=>{
+      dispatch(state_fetching())
+      await axios.post('https://api.sortika.com/client/withdraw',{
+        id:id,
+        amount:amount
+      }).then((res)=>{
+
+        console.log(res)
+        dispatch(clientbalance(res.data.balance))
+        dispatch(not_fetching())
+
+        
+      }).catch((error)=>{
+        console.log(error)
+      })
+    }
+
+    export const TraderDeposit=(amount,id)=>async(dispatch)=>{
+      dispatch(state_fetching())
+      await axios.post('https://api.sortika.com/trader/deposit',{
+        id:id,
+        amount:amount
+      }).then((res)=>{
+
+        console.log(res)
+        dispatch(traderbalance(res.data.balance))
+        dispatch(not_fetching())
+
+        
+      }).catch((error)=>{
+        console.log(error)
+      })
+    }
+    export const TraderWithdraw=(amount,id)=>async(dispatch)=>{
+      dispatch(state_fetching())
+      await axios.post('https://api.sortika.com/trader/withdraw',{
+        id:id,
+        amount:amount
+      }).then((res)=>{
+
+        console.log(res)
+        dispatch(traderbalance(res.data.balance))
+        dispatch(not_fetching())
+
+        
+      }).catch((error)=>{
+        console.log(error)
+      })
+    }
+
+    export const getClientBalance=(id)=>async(dispatch)=>{
+      dispatch(state_fetching())
+      await axios.post('https://api.sortika.com/client/balance',
+      {
+        id:id
+      }).then((res)=>{
+        console.log(res.data)
+        dispatch(clientbalance(res.data.info))
+        dispatch(not_fetching())
+
+      }).catch((error)=>{
+        console.log(error.response.data)
+        state_fetch_error(error.response.data)
+      })
+
+
+    }
+    export const getTraderBalance=(id)=>async(dispatch)=>{
+      dispatch(state_fetching())
+      await axios.post('https://api.sortika.com/trader/balance',
+      {
+        id:id
+      }).then((res)=>{
+        console.log(res.data)
+        dispatch(traderbalance(res.data.info))
+        dispatch(not_fetching())
+
+      }).catch((error)=>{
+        console.log(error.response.data)
+        state_fetch_error(error.response.data)
+      })
+
+
+    }
     //forgot password
     export const submitForgotemailTrader=(email)=>async(dispatch)=>{
             dispatch(state_fetching())

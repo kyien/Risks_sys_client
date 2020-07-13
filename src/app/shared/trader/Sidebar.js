@@ -136,7 +136,7 @@ class TraderSidebar extends Component {
               <ul className="nav flex-column sub-menu">
                 <li className="nav-item"> <Link className={ this.isPathActive('/trader/transfer/deposit') ? 'nav-link active' : 'nav-link' } to="/trader/transfer/deposit">Deposit</Link></li>
                 <li className="nav-item"> <Link className={ this.isPathActive('/trader/transfer/withdraw') ? 'nav-link active' : 'nav-link' } to="/trader/transfer/withdraw">Withdraw</Link></li>
-                {/* <li className="nav-item"> <Link className={ this.isPathActive('/basic-ui/typography') ? 'nav-link active' : 'nav-link' } to="/basic-ui/typography">Typography</Link></li> */}
+                <li className="nav-item"> <Link className={ this.isPathActive('/trader/finance/report') ? 'nav-link active' : 'nav-link' } to="/trader/finance/report">Reports</Link></li>
               </ul>
             </Collapse>
           </li>
@@ -150,7 +150,8 @@ class TraderSidebar extends Component {
               <ul className="nav flex-column sub-menu">
                 <li className="nav-item"> <Link className={ this.isPathActive('/trader/trades/live') ? 'nav-link active' : 'nav-link' } to="/trader/trades/live">Live Trade</Link></li>
                 <li className="nav-item"> <Link className={ this.isPathActive('/trader/trades/demo') ? 'nav-link active' : 'nav-link' } to="/trader/trades/demo">Demo Trade</Link></li>
-                {/* <li className="nav-item"> <Link className={ this.isPathActive('/basic-ui/typography') ? 'nav-link active' : 'nav-link' } to="/basic-ui/typography">Typography</Link></li> */}
+                <li className="nav-item"> <Link className={ this.isPathActive('/trader/trades/report') ? 'nav-link active' : 'nav-link' } to="/trader/trades/report">Live Reports</Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/trader/trades/report') ? 'nav-link active' : 'nav-link' } to="/trader/trades/report">Demo Reports</Link></li>
               </ul>
             </Collapse>
           </li>

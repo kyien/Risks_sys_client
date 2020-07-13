@@ -46,7 +46,8 @@ class ClientSidebar extends Component {
       {path:'/icons', state: 'iconsMenuOpen'},
       {path:'/charts', state: 'chartsMenuOpen'},
       {path:'/account', state: 'accPagesOpen'},
-      {path:'/transfer', state:'depositOpen'}
+      {path:'/transfer', state:'depositOpen'},
+      {path:'/invest', state:'investOpen'}
     ];
 
     dropdownPaths.forEach((obj => {
@@ -126,17 +127,31 @@ class ClientSidebar extends Component {
             </div>
             <Collapse in={ this.state.depositOpen }>
               <ul className="nav flex-column sub-menu">
-                <li className="nav-item"> <Link className={ this.isPathActive('/client/transfer/deposit') ? 'nav-link active' : 'nav-link' } to="/client/transfer/deposit">Deposit</Link></li>
-                <li className="nav-item"> <Link className={ this.isPathActive('/client/transfer/withdraw') ? 'nav-link active' : 'nav-link' } to="/client/transfer/withdraw">Withdraw</Link></li>
-                {/* <li className="nav-item"> <Link className={ this.isPathActive('/basic-ui/typography') ? 'nav-link active' : 'nav-link' } to="/basic-ui/typography">Typography</Link></li> */}
+                <li className="nav-item"> <Link className={ this.isPathActive('/client/transaction/deposit') ? 'nav-link active' : 'nav-link' } to="/client/transaction/deposit">Deposit</Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/client/transaction/withdraw') ? 'nav-link active' : 'nav-link' } to="/client/transaction/withdraw">Withdraw</Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/client/transaction/reports') ? 'nav-link active' : 'nav-link' } to="/client/transaction/reports">Reports</Link></li>
               </ul>
             </Collapse>
           </li>
           <li className={ this.isPathActive('/trade-options') ? 'nav-item active' : 'nav-item' }>
           <Link className="nav-link" to="/client/trade-options">
               <i className="mdi mdi-chart-areaspline menu-icon"></i>
-              <span className="menu-title">Trade Options</span>
+              <span className="menu-title">Investment Options</span>
             </Link>
+          </li>
+          <li className={ this.isPathActive('/invest') ? 'nav-item active' : 'nav-item' }>
+            <div className={ this.state.investOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('investOpen') } data-toggle="collapse">
+              <i className="mdi mdi-account-star menu-icon"></i>
+              <span className="menu-title">Investment Reports</span>
+              <i className="menu-arrow"></i>
+            </div>
+            <Collapse in={  this.state.investOpen }>
+              <ul className="nav flex-column sub-menu">
+                <li className="nav-item"> <Link className={ this.isPathActive('/client/report/MAMM') ? 'nav-link active' : 'nav-link' } to="/client/report/MAMM">MAMM</Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/client/report/PAMM') ? 'nav-link active' : 'nav-link' } to="/client/report/PAMM">PAMM</Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/client/report/Hedge') ? 'nav-link active' : 'nav-link' } to="/client/report/Hedge">Hedge Fund</Link></li>
+              </ul>
+            </Collapse>
           </li>
           <li className={ this.isPathActive('/account') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.accPagesOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('accPagesOpen') } data-toggle="collapse">

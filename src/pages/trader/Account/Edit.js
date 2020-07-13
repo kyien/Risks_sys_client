@@ -57,10 +57,14 @@ import {connect} from 'react-redux'
               <div className="card-body">
                 <h4 className="card-title">Edit Profile</h4>
 
-                <div className="col-md-4 offset-md-3">
+              
+                <form className="forms-sample" onSubmit={this.onSubmit}>
+
+                  <Form.Group>
+                  <div className="col-md-4 offset-md-3">
                 <Image src={this.state.image} roundedCircle width="200px"  height="200px"/>
                 </div>
-                <form className="forms-sample" onSubmit={this.onSubmit}>
+                  </Form.Group>
                   <Form.Group>
                     <label htmlFor="exampleInputUsername1">My username:</label>
                     <Form.Control

@@ -1,17 +1,28 @@
 import React, { Component } from 'react'
 import { Form,Modal,Button } from 'react-bootstrap'
+import { connect } from "react-redux"
+import {TraderDeposit} from '../../redux/Action'
+import SimpleReactValidator from 'simple-react-validator';
 
-export default class Deposit extends Component {
+class Deposit extends Component {
 
-
-    state = {
+  constructor(){
+    super()
+    this.state = {
         amount: '',
         payment_option:'',
         acc_no:'',
         email:'',
         phone:'',
+        message:'',
         show:false
-      };
+      }
+      this.validator = new SimpleReactValidator()
+
+
+    }
+
+    
      
       changeHandler = event => {
         //event.preventDefault()
@@ -19,10 +30,13 @@ export default class Deposit extends Component {
 
       }
 
-      onSubmit=(event)=> {
+      onSubmit=async (event)=> {
             event.preventDefault()
 
-          this.setState({show:true})
+
+        await this.props.TraderDeposit(this.state.amount,this.props.AuthUser.id)
+                 
+        this.setState({show:true,message:'Success your deposit was received successfully!'})
 
       }
 
@@ -105,9 +119,9 @@ export default class Deposit extends Component {
 
                 <Modal show={this.state.show} onHide={()=>this.setState({show:false})}>
                         <Modal.Header closeButton>
-                        <Modal.Title>Deposit</Modal.Title>
+                        <Modal.Title>Trader Deposit</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>STK PUSH initiated.check your phone for pin entrance!</Modal.Body>
+                        <Modal.Body>{this.state.message}</Modal.Body>
                         <Modal.Footer>
                         <Button variant="primary" onClick={()=>this.setState({show:false})}>
                             Okay
@@ -129,11 +143,14 @@ export default class Deposit extends Component {
                         size="lg"
                         name="amount"
                          value={this.state.amount} 
+                         onFocus={()=>this.validator.showMessageFor('amount')}
                           onChange={this.changeHandler}
                 
                           />
                   </Form.Group>
-                  <Form.Group>
+                  {this.validator.message('amount', this.state.amount, 'required|numeric|min:0')}
+
+                  {/* <Form.Group>
                   <label htmlFor="exampleInputUsername1">Payment Option</label>
                             <Form.Control as="select" custom="true"  name="payment_option" value={this.state.payment_option}  onChange={this.changeHandler}>
                             <option  value="">Select Payment option </option>
@@ -145,9 +162,15 @@ export default class Deposit extends Component {
                               </Form.Control>
                   </Form.Group>
 
-                  {this.state.payment_option ? <PaymentSwitch/> : null}
+                  {this.state.payment_option ? <PaymentSwitch/> : null} */}
                 
+                      
+                {this.validator.allValid() ?
                   <button type="submit" className="btn btn-primary mr-2" >Submit</button>
+                  : 
+                  <button type="submit" className="btn btn-primary mr-2" disabled>Submit</button>
+
+                  }
                 </form>
               </div>
             </div>
@@ -159,3 +182,21 @@ export default class Deposit extends Component {
         )
     }
 }
+
+const mapStateToProps=(state)=>{
+  return{
+    AuthUser:state.Auth.user, 
+    Token:state.Auth.token ,
+    bal:state.Auth.trader_acc_balance
+
+  }
+}
+const mapDispatchToProps={
+  
+  TraderDeposit
+
+
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Deposit)

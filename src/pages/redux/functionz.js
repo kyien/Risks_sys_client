@@ -10,7 +10,7 @@ export const  calculateWin = async(dat) => {
             })
         })
 
-        let winratio=dat.length / wins.length
+        let winratio=wins.length / dat.length 
         
         return Math.round((winratio+ Number.EPSILON) * 100) / 100
   }
@@ -27,7 +27,7 @@ export const  calculateWin = async(dat) => {
         })
     })
 
-    let lossratio=dat.length / loss.length
+    let lossratio=loss.length /dat.length
     
     return Math.round((lossratio+ Number.EPSILON) * 100) / 100
 }
@@ -47,3 +47,10 @@ export const calc_profitfactor = async(accounts) => {
     return Math.round((avgprofit+ Number.EPSILON) * 100) / 100
 }
 
+// export const calc_profit_rate=async(signals)=>{
+//     let success=[]
+//     await signals.forEach(async(account)=>{
+        
+//     })
+
+// }

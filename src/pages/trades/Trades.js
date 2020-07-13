@@ -40,14 +40,14 @@ export default class Trades extends Component {
               <option value="forex">Forex</option>
               
             </Form.Control></Form.Group>
-               <Form.Group>
+               {/* <Form.Group>
               <Form.Control as="select" custom="true" name="trader" value={this.state.trader}  onChange={this.valuechange}>
               <option value="">Select Trader</option>
               <option value="T-A">Trader 1   65% success rate</option>
               <option value="T-B">Trader 2  75% success rate</option>
               <option value="T-C">Trader 3   70% success rate</option>
               
-            </Form.Control></Form.Group>
+            </Form.Control></Form.Group> */}
               <Form.Group>
               <label htmlFor="exampleInputUsername1"> % Risk</label>
               <Form.Control

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Line, Doughnut, Bar } from 'react-chartjs-2';
 import { Sparklines, SparklinesBars } from 'react-sparklines';
 import { ProgressBar, Dropdown } from 'react-bootstrap';
+import {connect} from 'react-redux'
 
 // import DatePicker from 'react-datepicker';
 // import { Dropdown } from 'react-bootstrap';
@@ -267,9 +268,9 @@ toggleProBanner() {
                     <i className="mdi mdi-currency-usd text-danger icon-lg"></i>
                   </div>
                   <div className="float-right">
-                    <p className="mb-0 text-right text-dark">Current Balance</p>
+                    <p className="mb-0 text-right text-dark">Profit Rate</p>
                     <div className="fluid-container">
-                      <h3 className="font-weight-medium text-right mb-0 text-dark">$65,650</h3>
+                      <h3 className="font-weight-medium text-right mb-0 text-dark">80%</h3>
                     </div>
                   </div>
                 </div>
@@ -286,9 +287,9 @@ toggleProBanner() {
                     <i className="mdi mdi-coin text-warning icon-lg"></i>
                   </div>
                   <div className="float-right">
-                    <p className="mb-0 text-right text-dark">Total Deposits</p>
+                    <p className="mb-0 text-right text-dark">Total Live Signals</p>
                     <div className="fluid-container">
-                      <h3 className="font-weight-medium text-right mb-0 text-dark">$3455</h3>
+                      <h3 className="font-weight-medium text-right mb-0 text-dark">55</h3>
                     </div>
                   </div>
                 </div>
@@ -305,9 +306,9 @@ toggleProBanner() {
                     <i className="mdi mdi-poll-box text-success icon-lg"></i>
                   </div>
                   <div className="float-right">
-                    <p className="mb-0 text-right text-dark">Total Withdrawals</p>
+                    <p className="mb-0 text-right text-dark">Total Demo Signals</p>
                     <div className="fluid-container">
-                      <h3 className="font-weight-medium text-right mb-0 text-dark">$ 5693</h3>
+                      <h3 className="font-weight-medium text-right mb-0 text-dark">693</h3>
                     </div>
                   </div>
                 </div>
@@ -324,9 +325,9 @@ toggleProBanner() {
                     <i className="mdi mdi-account-box-multiple text-info icon-lg"></i>
                   </div>
                   <div className="float-right">
-                    <p className="mb-0 text-right text-dark">Total Trades</p>
+                    <p className="mb-0 text-right text-dark">Total Withdrawal</p>
                     <div className="fluid-container">
-                      <h3 className="font-weight-medium text-right mb-0 text-dark">246</h3>
+                      <h3 className="font-weight-medium text-right mb-0 text-dark">$246</h3>
                     </div>
                   </div>
                 </div>
@@ -336,7 +337,7 @@ toggleProBanner() {
             </div>
           </div>
         </div>
-        <div className="row">
+        {/* <div className="row">
           <div className="col-md-12 grid-margin">
             <div className="card">
               <div className="card-body">
@@ -359,7 +360,7 @@ toggleProBanner() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* <div className="row">
           <div className="col-xl-4 col-lg-6 col-sm-6  grid-margin stretch-card">
             <div className="card">
@@ -588,275 +589,9 @@ toggleProBanner() {
           </div>
         </div>
 
-        {/* <div className="row">
-          <div className="col-md-4 grid-margin stretch-card">
-            <div className="card">
-              <div className="card-body py-5">
-                <div className="d-flex flex-row justify-content-center align-items">
-                  <i className="mdi mdi-facebook text-facebook icon-lg"></i>
-                  <div className="ml-3">
-                    <h6 className="text-facebook font-weight-semibold mb-0">2.62 Subscribers</h6>
-                    <p className="text-muted card-text">You main list growing</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 grid-margin stretch-card">
-            <div className="card">
-              <div className="card-body py-5">
-                <div className="d-flex flex-row justify-content-center align-items">
-                  <i className="mdi mdi-google-plus text-google icon-lg"></i>
-                  <div className="ml-3">
-                    <h6 className="text-google font-weight-semibold mb-0">3.4k Followers</h6>
-                    <p className="text-muted card-text">You main list growing</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 grid-margin stretch-card">
-            <div className="card">
-              <div className="card-body py-5">
-                <div className="d-flex flex-row justify-content-center align-items">
-                  <i className="mdi mdi-twitter text-twitter icon-lg"></i>
-                  <div className="ml-3">
-                    <h6 className="text-twitter font-weight-semibold mb-0">3k followers</h6>
-                    <p className="text-muted card-text">You main list growing</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-12 grid-margin">
-            <div className="card">
-              <div className="card-body">
-                <h4 className="card-title">Orders</h4>
-                <div className="table-responsive">
-                  <table className="table table-striped">
-                    <thead>
-                      <tr>
-                        <th> # </th>
-                        <th> First name </th>
-                        <th> Progress </th>
-                        <th> Amount </th>
-                        <th> Sales </th>
-                        <th> Deadline </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="font-weight-medium"> 1 </td>
-                        <td> Herman Beck </td>
-                        <td>
-                          <ProgressBar variant="success" striped now={25}/>
-                        </td>
-                        <td> $ 77.99 </td>
-                        <td className="text-danger"> 53.64% <i className="mdi mdi-arrow-down"></i>
-                        </td>
-                        <td> May 15, 2015 </td>
-                      </tr>
-                      <tr>
-                        <td className="font-weight-medium"> 2 </td>
-                        <td> Messsy Adam </td>
-                        <td>
-                          <ProgressBar variant="danger" striped now={75}/>
-                        </td>
-                        <td> $245.30 </td>
-                        <td className="text-success"> 24.56% <i className="mdi mdi-arrow-up"></i>
-                        </td>
-                        <td> July 1, 2015 </td>
-                      </tr>
-                      <tr>
-                        <td className="font-weight-medium"> 3 </td>
-                        <td> John Richards </td>
-                        <td>
-                          <ProgressBar variant="warning" striped now={90}/>
-                        </td>
-                        <td> $138.00 </td>
-                        <td className="text-danger"> 28.76% <i className="mdi mdi-arrow-down"></i>
-                        </td>
-                        <td> Apr 12, 2015 </td>
-                      </tr>
-                      <tr>
-                        <td className="font-weight-medium"> 4 </td>
-                        <td> Peter Meggik </td>
-                        <td>
-                          <ProgressBar variant="primary" striped now={50}/>
-                        </td>
-                        <td> $ 77.99 </td>
-                        <td className="text-danger"> 53.45% <i className="mdi mdi-arrow-down"></i>
-                        </td>
-                        <td> May 15, 2015 </td>
-                      </tr>
-                      <tr>
-                        <td className="font-weight-medium"> 5 </td>
-                        <td> Edward </td>
-                        <td>
-                          <ProgressBar variant="danger" striped now={35}/>
-                        </td>
-                        <td> $ 160.25 </td>
-                        <td className="text-success"> 18.32% <i className="mdi mdi-arrow-up"></i>
-                        </td>
-                        <td> May 03, 2015 </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 grid-margin">
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title mb-4">Manage Tickets</h5>
-                <div className="fluid-container">
-                  <div className="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
-                    <div className="col-md-1">
-                      <img className="img-sm rounded-circle mb-4 mb-md-0 d-block mx-md-auto" src={require("../../assets/images/faces/face1.jpg")} alt="profile" /> </div>
-                    <div className="ticket-details col-md-9">
-                      <div className="d-lg-flex">
-                        <p className="text-dark font-weight-semibold mr-2 mb-0 no-wrap">James :</p>
-                        <p className="text-primary mr-1 mb-0">[#23047]</p>
-                        <p className="mb-0 ellipsis">Donec rutrum congue leo eget malesuada.</p>
-                      </div>
-                      <p className="text-gray ellipsis mb-2">Donec rutrum congue leo eget malesuada. Quisque velit nisi, pretium ut lacinia in, elementum id enim vivamus. </p>
-                      <div className="row text-gray d-md-flex d-none">
-                        <div className="col-4 d-flex">
-                          <small className="mb-0 mr-2 text-muted text-muted">Last responded :</small>
-                          <small className="Last-responded mr-2 mb-0 text-muted text-muted">3 hours ago</small>
-                        </div>
-                        <div className="col-4 d-flex">
-                          <small className="mb-0 mr-2 text-muted text-muted">Due in :</small>
-                          <small className="Last-responded mr-2 mb-0 text-muted text-muted">2 Days</small>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ticket-actions col-md-2">
-                      <div className="btn-group dropdown">
-                        <Dropdown>
-                          <Dropdown.Toggle className="btn btn-success btn-sm">
-                            Manage
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu className="navbar-dropdown preview-list">
-                            <Dropdown.Item>
-                              Quick reply
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                              Another action
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                              Resolve Issue
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                              Close Issue
-                            </Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
-                    <div className="col-md-1">
-                      <img className="img-sm rounded-circle mb-4 mb-md-0 d-block mx-md-auto" src={require("../../assets/images/faces/face2.jpg")} alt="profile" /> </div>
-                    <div className="ticket-details col-md-9">
-                      <div className="d-lg-flex">
-                        <p className="text-dark font-weight-semibold mr-2 mb-0 no-wrap">Stella :</p>
-                        <p className="text-primary mr-1 mb-0">[#23135]</p>
-                        <p className="mb-0 ellipsis">Curabitur aliquet quam id dui posuere blandit.</p>
-                      </div>
-                      <p className="text-gray ellipsis mb-2">Pellentesque in ipsum id orci porta dapibus. Sed porttitor lectus nibh. Curabitur non nulla sit amet nisl. </p>
-                      <div className="row text-gray d-md-flex d-none">
-                        <div className="col-4 d-flex">
-                          <small className="mb-0 mr-2 text-muted">Last responded :</small>
-                          <small className="Last-responded mr-2 mb-0 text-muted">3 hours ago</small>
-                        </div>
-                        <div className="col-4 d-flex">
-                          <small className="mb-0 mr-2 text-muted">Due in :</small>
-                          <small className="Last-responded mr-2 mb-0 text-muted">2 Days</small>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ticket-actions col-md-2">
-                      <div className="btn-group dropdown">
-                        <Dropdown>
-                          <Dropdown.Toggle className="btn btn-success btn-sm">
-                            Manage
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu className="navbar-dropdown preview-list">
-                            <Dropdown.Item>
-                              Quick reply
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                              Another action
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                              Resolve Issue
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                              Close Issue
-                            </Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row ticket-card mt-3">
-                    <div className="col-md-1">
-                      <img className="img-sm rounded-circle mb-4 mb-md-0 d-block mx-md-auto" src={require("../../assets/images/faces/face3.jpg")} alt="profile" /> </div>
-                    <div className="ticket-details col-md-9">
-                      <div className="d-lg-flex">
-                        <p className="text-dark font-weight-semibold mr-2 mb-0 no-wrap">John Doe :</p>
-                        <p className="text-primary mr-1 mb-0">[#23246]</p>
-                        <p className="mb-0 ellipsis">Mauris blandit aliquet elit, eget tincidunt nibh pulvinar.</p>
-                      </div>
-                      <p className="text-gray ellipsis mb-2">Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus. Lorem ipsum dolor sit amet.</p>
-                      <div className="row text-gray d-md-flex d-none">
-                        <div className="col-4 d-flex">
-                          <small className="mb-0 mr-2 text-muted">Last responded :</small>
-                          <small className="Last-responded mr-2 mb-0 text-muted">3 hours ago</small>
-                        </div>
-                        <div className="col-4 d-flex">
-                          <small className="mb-0 mr-2 text-muted">Due in :</small>
-                          <small className="Last-responded mr-2 mb-0 text-muted">2 Days</small>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ticket-actions col-md-2">
-                      <div className="btn-group dropdown">
-                        <Dropdown>
-                          <Dropdown.Toggle className="btn btn-success dropdown-toggle btn-sm">
-                            Manage
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu className="navbar-dropdown preview-list">
-                            <Dropdown.Item>
-                              Quick reply
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                              Another action
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                              Resolve Issue
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                              Close Issue
-                            </Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
      
-      */}
+      
       </div> 
     );
   }
@@ -876,4 +611,14 @@ const ListItem = (props) => {
       </li>
   )
 };
-export default TraderDashboard;
+
+
+const mapStateToProps=(state)=>{
+  return{
+    AuthUser:state.Auth.user, 
+    Token:state.Auth.token ,
+    bal:state.Auth.trader_acc_balance
+
+  }
+}
+export default connect(mapStateToProps)(TraderDashboard)
