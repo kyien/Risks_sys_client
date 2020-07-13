@@ -4,9 +4,7 @@ import {withRouter} from 'react-router-dom'
 import Routes from './routes'
 import '../../app/App.scss';
 import ClientNavbar from '../../app/shared/client/Navbar';
-import TraderNavbar from '../../app/shared/trader/Navbar';
 import ClientSidebar from '../../app/shared/client/Sidebar';
-import TraderSidebar from '../../app/shared/trader/Sidebar';
 import Footer from '../../app/shared/Footer';
 import { connect } from "react-redux"
 
@@ -18,8 +16,8 @@ import { connect } from "react-redux"
       this.onRouteChanged();
     }
   render() {
-    let navbarComponent = !this.state.isFullPageLayout ? this.props.usertype ==='trader'?<TraderNavbar/>:<ClientNavbar/> : '';
-    let sidebarComponent = !this.state.isFullPageLayout ? this.props.usertype ==='trader'?<TraderSidebar/>:<ClientSidebar/> : '';
+    let navbarComponent = !this.state.isFullPageLayout ? <ClientNavbar/> : '';
+    let sidebarComponent = !this.state.isFullPageLayout ? <ClientSidebar/> : '';
     let footerComponent = !this.state.isFullPageLayout ? <Footer/> : '';
     return (
       <div className="container-scroller">

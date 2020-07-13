@@ -5,7 +5,7 @@ import React, { Component} from 'react';
 import { connect } from "react-redux"
 
 import ClientRoutes from '../routes/ClientRoutes'
-import TraderRoutes from '../routes/TraderRoutes'
+// import TraderRoutes from '../routes/TraderRoutes'
 
 
 
